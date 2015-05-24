@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8"/>
+<title>PiPurr &#8211; The Remote Cat Interaction Server | Can&#039;t Hack, Won&#039;t Hack</title>
+<link rel="profile" href="//gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="//canthack.org/wp-content/themes/twentyten/style.css"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Feed" href="//canthack.org/wp-content/plugins/really-static/static/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; PiPurr &#8211; The Remote Cat Interaction Server Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/feed/"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/canthack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='fancybox-css' href='//canthack.org/wp-content/plugins/fancyboxify/fancybox/fancybox.css?ver=1.3.4' type='text/css' media='all'/>
+<link rel='stylesheet' id='genericons-css' href='//canthack.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='//canthack.org/wp-content/plugins/jetpack/css/jetpack.css?ver=3.5.3' type='text/css' media='all'/>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.fancybox.pack.js?ver=1.3.4'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.easing.pack.js?ver=1.3'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.mousewheel.pack.js?ver=3.0.4'></script>
+<link rel='prev' title='Introducing &#8216;The Sin&#039;: Edd&#8217;s YM2612 MIDI Instrument' href='//canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/'/>
+<link rel='next' title='BarCamp Canterbury 2013 round-up' href='//canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/'/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='canonical' href='//canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/'/>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
+
+		imglinks.each(function(){ 
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
+		});
+	});
+</script><meta name="really-static looptest" content="testtesttest"/>
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="PiPurr - The Remote Cat Interaction Server"/>
+<meta property="og:url" content="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/"/>
+<meta property="og:description" content="All the best hacks and open-source projects come about by scratching personal itches. In fact when asked by friends and acquaintances &quot;How do I start with coding - what should I write?&quot;, that is my..."/>
+<meta property="article:published_time" content="2013-04-14T09:58:28+00:00"/>
+<meta property="article:modified_time" content="2013-04-15T11:44:41+00:00"/>
+<meta property="article:author" content="http://canthack.org/wp-content/plugins/really-static/static/author/tris/"/>
+<meta property="og:site_name" content="Can&#039;t Hack, Won&#039;t Hack"/>
+<meta property="og:image" content="http://canthack.org/uploads/pipurr-300x260.png"/>
+<meta property="og:image" content="http://canthack.org/uploads/newui-168x300.png"/>
+<meta property="og:image" content="http://canthack.org/uploads/share-168x300.png"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:image" content="http://canthack.org/uploads/pipurr-300x260.png?w=240"/>
+<meta name="twitter:card" content="summary"/>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+<body class="single single-post postid-1361 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">Can&#039;t Hack, Won&#039;t Hack</a>
+</span>
+</div>
+<div id="site-description"></div>
+<img src="//canthack.org/uploads/sltrain.jpg" width="940" height="198" alt=""/>
+</div> 
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu"><ul><li><a href="http://canthack.org/wp-content/plugins/really-static/static/">Home</a></li><li class="page_item page-item-2"><a href="http://canthack.org/wp-content/plugins/really-static/static/about/">About</a></li><li class="page_item page-item-106"><a href="http://canthack.org/wp-content/plugins/really-static/static/future/">Future</a></li><li class="page_item page-item-247"><a href="http://canthack.org/wp-content/plugins/really-static/static/rules/">Rules</a></li></ul></div>
+</div> 
+</div> 
+</div> 
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/" rel="prev"><span class="meta-nav">&larr;</span> Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/" rel="next">BarCamp Canterbury 2013 round-up <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="post-1361" class="post-1361 post type-post status-publish format-standard hentry category-hardware category-programming category-software">
+<h1 class="entry-title">PiPurr &#8211; The Remote Cat Interaction Server</h1>
+<div class="entry-meta">
+<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/" title="09:58" rel="bookmark"><span class="entry-date">April 14, 2013</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://canthack.org/wp-content/plugins/really-static/static/author/tris/" title="View all posts by Tris">Tris</a></span> </div> 
+<div class="entry-content">
+<div id="attachment_1381" style="width: 310px" class="wp-caption alignright"><a href="http://canthack.org/wp-content/plugins/really-static/static/uploads/pipurr.png" rel="fancybox-1361"><img class="size-medium wp-image-1381" alt="PiPurr Server" src="//canthack.org/uploads/pipurr-300x260.png" width="300" height="260"/></a><p class="wp-caption-text">PiPurr Server</p></div>
+<p>All the best hacks and open-source projects come about by scratching personal itches. In fact when asked by friends and acquaintances &#8220;<em>How do I start with coding &#8211; what should I write?</em>&#8220;, that is my usual answer &#8211; &#8220;<em>Find something you don&#8217;t like or would like to improve and do that</em>&#8220;.</p>
+<p>This brings us to the idea of PiPurr, what I like to call the Remote Cat Interaction Server.</p>
+<p>Whenever we go on holiday, we never really get to relax, because <a href="http://canthack.org/wp-content/plugins/really-static/static/author/han/" target="_blank">Hannah</a> is always asking me things like &#8220;<em>Do you think the cats are OK?</em>&#8220;, &#8220;<em>What do you think the cats are up to?</em>&#8221; etc. PiPurr is the solution to this problem.</p>
+<p>The goal is not just to be able to keep an eye on what the cats are doing when away from home, but also to interact and play with them remotely too.</p>
+<p>PiPurr is a simple client-server solution. The <a title="PiPurr Server" href="https://github.com/tristan2468/PiPurr-Server" target="_blank">server</a> runs on a Raspberry Pi, for low power consumption and provides the functionality &#8211; capturing images, dispensing treats, making sounds play from the speakers etc, and clients connect to this over HTTP and request those actions.</p>
+<div id="attachment_1373" style="width: 178px" class="wp-caption alignleft"><a href="http://canthack.org/wp-content/plugins/really-static/static/uploads/newui.png" rel="fancybox-1361"><img class="size-medium wp-image-1373" alt="PiPurr for Android" src="//canthack.org/uploads/newui-168x300.png" width="168" height="300"/></a><p class="wp-caption-text">PiPurr for Android</p></div>
+<p>The server is implemented as a small Python web server, using <a title="HTTPServer" href="http://docs.python.org/2/library/basehttpserver.html" target="_blank">HTTPServer</a> that, instead of serving static files from a directory, exposes a small number of URIs that correspond to those actions. This means that all that is required to access it is a browser. A summary of the actions are:</p>
+<ul>
+<li>/cats.jpeg &#8211; Capture and return a photo from the webcam. Uses <a title="OpenCV" href="http://opencv.org/" target="_blank">OpenCV</a>.</li>
+<li>/sound &#8211; Play the sound out the speakers to entice the cats over.</li>
+<li>/treat &#8211; Dispense a cat treat &#8211; Currently in development, and will use a <a title="PicoBorg" href="http://piborg.com/picoborg" target="_blank">PicoBorg</a> stepper motor to drive a treat dispenser. Keep a look out for another blog post about this in the future.</li>
+</ul>
+<p>The decision to use the (rather large and <a href="http://eduardofv.com/read_post/185-Installing-OpenCV-on-the-Raspberry-Pi" target="_blank">fiddly to get working on Raspberry Pi</a>) OpenCV for image capture is down to the fact that in the future I am going to write a cat detector, and possibly other vision-based functionality.</p>
+<p>A neat addition to the server is the <a title="LedBorg" href="http://piborg.com/ledborg" target="_blank">LedBorg</a>, which is an RGB LED add-on, set to flash different colours depending on what happens when requests come in. Red for 403s, 500s etc., green for 200 on the image URI and blue for 200 on the sound URI.</p>
+<div id="attachment_1374" style="width: 178px" class="wp-caption alignright"><a href="http://canthack.org/wp-content/plugins/really-static/static/uploads/share.png" rel="fancybox-1361"><img class="size-medium wp-image-1374 " title="Sharing" alt="Sharing" src="//canthack.org/uploads/share-168x300.png" width="168" height="300"/></a><p class="wp-caption-text">Sharing</p></div>
+<p>For ease of use, I also developed an <a title="PiPurr for Android" href="https://github.com/tristan2468/PiPurr-for-Android" target="_blank">Android client</a> that allows easy access to PiPurr whilst out and about. The app also allows for sharing of the captured images over email, Facebook etc.</p>
+<p>I will be adding more functionality to the solution as time goes on. Some of the things I have planned are:</p>
+<ul>
+<li>/ &#8211; Implement a web UI to control it easier with a web browser.</li>
+<li>/laser &#8211; Move a laser pointer or similar cat to about with motor control.</li>
+<li>/video &#8211; Stream live video.</li>
+</ul>
+<p>I plan to talk about this project at <a title="BarCamp Canterbury" href="http://barcampcanterbury.com" target="_blank">BarCamp Canterbury</a> on the 27th April 2013 if you would like to find out more, or have any cool ideas.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1361" class="share-facebook sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/?share=facebook" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1361" class="share-twitter sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-stumbleupon"><a rel="nofollow" data-shared="" class="share-stumbleupon sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/?share=stumbleupon" target="_blank" title="Click to share on StumbleUpon"><span></span><span class="sharing-screen-reader-text">Click to share on StumbleUpon (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div> </div> 
+<div id="entry-author-info">
+<div id="author-avatar">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=60&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=120&amp;d=mm&amp;r=g 2x' class='avatar avatar-60 photo' height='60' width='60'/> </div> 
+<div id="author-description">
+<h2>About Tris</h2>
+Tris is a software engineer with a PhD in image analysis. He likes real beer, photography, electric guitar based music and Unix operating systems. <div id="author-link">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/author/tris/" rel="author">
+View all posts by Tris <span class="meta-nav">&rarr;</span> </a>
+</div> 
+</div> 
+</div> 
+<div class="entry-utility">
+This entry was posted in <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/" rel="category tag">Hardware</a>, <a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/" rel="category tag">Programming</a>, <a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/" rel="category tag">Software</a>. Bookmark the <a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/" title="Permalink to PiPurr &#8211; The Remote Cat Interaction Server" rel="bookmark">permalink</a>. </div> 
+</div> 
+<div id="nav-below" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/" rel="prev"><span class="meta-nav">&larr;</span> Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/" rel="next">BarCamp Canterbury 2013 round-up <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="comments">
+<h3 id="comments-title">7 Responses to <em>PiPurr &#8211; The Remote Cat Interaction Server</em></h3>
+<ol class="commentlist">
+<li class="comment even thread-even depth-1" id="li-comment-24726">
+<div id="comment-24726">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/cecfc8f7eda85cb0143b271c2511b996?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cecfc8f7eda85cb0143b271c2511b996?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://www.theartofindigo.com' rel='external nofollow' class='url'>Lucy Lindsell</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24726/index.html">
+April 14, 2013 at 16:52</a> </div> 
+<div class="comment-body"><p>This sounds fantastic, can&#8217;t wait to see it in action. And I love your writing <img src="//canthack.org/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;"/><br/>
+I would love to interact with my monkeys whilst being away.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24726#respond' onclick='return addComment.moveForm( "comment-24726", "24726", "respond", "1361" )' aria-label='Reply to Lucy Lindsell'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-24772">
+<div id="comment-24772">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/d62164e7636c20cead04c8ee9ab9b331?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/d62164e7636c20cead04c8ee9ab9b331?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://www.thegreatgeekery.com' rel='external nofollow' class='url'>Scott</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24772/index.html">
+April 17, 2013 at 20:03</a> </div> 
+<div class="comment-body"><p>Awesome work; I built a 2-axis laser pointer connected to the raspberryPi; it allows for IP control (I was working towards a similar project as you have). It works with the lightingPi software I wrote (<a href="https://github.com/scottjgibson/lightingPi" rel="nofollow">https://github.com/scottjgibson/lightingPi</a>). 2 Servo channels for X and Y and one PWM for laser brightness. It can be controlled with DMX and openOSC, but you can hack any control into it easily. I need to take a demo video with my cat. 😀</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24772#respond' onclick='return addComment.moveForm( "comment-24772", "24772", "respond", "1361" )' aria-label='Reply to Scott'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-24779">
+<div id="comment-24779">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/4561f47b136bd0e73472d223ef3dca60?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4561f47b136bd0e73472d223ef3dca60?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">M.</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24779/index.html">
+April 17, 2013 at 21:38</a> </div> 
+<div class="comment-body"><p>Hi,<br/>
+Seems like a great project. Have been working on something similar but for monitoring visitors and potential stalkers instead <img src="//canthack.org/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;"/> I&#8217;ve had limited success with video streaming. In general, setting up a streaming server that streams to a PC isn&#8217;t hard, its getting the android tablet to display the stream..would you please share your ideas on that front?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24779#respond' onclick='return addComment.moveForm( "comment-24779", "24779", "respond", "1361" )' aria-label='Reply to M.'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor odd alt depth-2" id="li-comment-24809">
+<div id="comment-24809">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24809/index.html">
+April 19, 2013 at 08:08</a> </div> 
+<div class="comment-body"><p>Streaming is possible with the MediaPlayer class:<br/>
+<a href="http://developer.android.com/reference/android/media/MediaPlayer.html" rel="nofollow">http://developer.android.com/reference/android/media/MediaPlayer.html</a><br/>
+It isn&#8217;t perfect though.<br/>
+Fortunately in this project, I will be in control of the format and parameters of the stream, which should make it easier.<br/>
+When I implement it, I will write it up here, so please keep checking back on this site and at the code repo:<br/>
+<a href="https://github.com/tristan2468/PiPurr-for-Android" rel="nofollow">https://github.com/tristan2468/PiPurr-for-Android</a></p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24809#respond' onclick='return addComment.moveForm( "comment-24809", "24809", "respond", "1361" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+<li class="comment even thread-odd thread-alt depth-1" id="li-comment-24810">
+<div id="comment-24810">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/036a1c0cd16cbd65ae717af58ab3f63b?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/036a1c0cd16cbd65ae717af58ab3f63b?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://www.recantha.co.uk/blog' rel='external nofollow' class='url'>Michael Horne</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24810/index.html">
+April 19, 2013 at 08:47</a> </div> 
+<div class="comment-body"><p>Sounds like a great project <img src="//canthack.org/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;"/></p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24810#respond' onclick='return addComment.moveForm( "comment-24810", "24810", "respond", "1361" )' aria-label='Reply to Michael Horne'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment odd alt thread-even depth-1" id="li-comment-24814">
+<div id="comment-24814">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/db3ff172972224c17cf44a18b217210f?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/db3ff172972224c17cf44a18b217210f?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">endrju</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24814/index.html">
+April 19, 2013 at 11:48</a> </div> 
+<div class="comment-body"><p>How did you a streaming video ?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24814#respond' onclick='return addComment.moveForm( "comment-24814", "24814", "respond", "1361" )' aria-label='Reply to endrju'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor even depth-2" id="li-comment-24815">
+<div id="comment-24815">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/#comment-24815/index.html">
+April 19, 2013 at 11:50</a> </div> 
+<div class="comment-body"><p>Please see my reply above.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2013/04/pipurr-the-remote-cat-interaction-server/?replytocom=24815#respond' onclick='return addComment.moveForm( "comment-24815", "24815", "respond", "1361" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2013/04/pipurr-the-remote-cat-interaction-server/#respond" style="display:none;">Cancel reply</a></small></h3>
+<form action="//canthack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p> <p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required'/></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"/></p>
+<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p> <p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"/> <input type='hidden' name='comment_post_ID' value='1361' id='comment_post_ID'/>
+<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="5dacaf3995"/></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="87"/></p> </form>
+</div> 
+</div> 
+</div> 
+</div> 
+<div id="primary" class="widget-area" role="complementary">
+<ul class="xoxo">
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="//canthack.org/wp-content/plugins/really-static/static/">
+<div>
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" value="" name="s" id="s"/>
+<input type="submit" id="searchsubmit" value="Search"/>
+</div>
+</form></li> <li id="recent-posts-2" class="widget-container widget_recent_entries"> <h3 class="widget-title">Recent Posts</h3> <ul>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/">A new mod for Mega Drive 60Hz colour correction</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/">BarCamp Canterbury 2013 round-up</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/">PiPurr &#8211; The Remote Cat Interaction Server</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/">OggCamp 12</a>
+</li>
+</ul>
+</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-57224/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-54358/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link">black</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-45466/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link">Cami</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-44423/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3> <ul>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2014/04/'>April 2014</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/06/'>June 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/04/'>April 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/09/'>September 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/08/'>August 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/06/'>June 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/05/'>May 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/04/'>April 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/03/'>March 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/12/'>December 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/11/'>November 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/10/'>October 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/09/'>September 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/07/'>July 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/06/'>June 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/05/'>May 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/04/'>April 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/03/'>March 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/02/'>February 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/01/'>January 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/12/'>December 2010</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/11/'>November 2010</a></li>
+</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3> <ul>
+<li class="cat-item cat-item-7"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/">Arduino</a>
+</li>
+<li class="cat-item cat-item-5"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/crafting/">Crafting</a>
+</li>
+<li class="cat-item cat-item-16"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/events/">Events</a>
+</li>
+<li class="cat-item cat-item-9"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/gardening/">Gardening</a>
+</li>
+<li class="cat-item cat-item-6"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/">Hardware</a>
+</li>
+<li class="cat-item cat-item-4"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/">Programming</a>
+</li>
+<li class="cat-item cat-item-10"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/">Software</a>
+</li>
+<li class="cat-item cat-item-1"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/uncategorized/">Uncategorized</a>
+</li>
+<li class="cat-item cat-item-3"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/unix/">Unix</a>
+</li>
+</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3> <ul>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/wp-login.php">Log in</a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li> </ul>
+</li> </ul>
+</div> 
+</div> 
+<div id="footer" role="contentinfo">
+<div id="colophon">
+<div id="site-info">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">
+Can&#039;t Hack, Won&#039;t Hack </a>
+</div> 
+<div id="site-generator"><a href="http://www.php-welt.net/really-static/">powered by really static WordPress</a></div> 
+</div> 
+</div> 
+</div> 
+<div style="display:none">
+<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+</div>
+<div class="grofile-hash-map-cecfc8f7eda85cb0143b271c2511b996">
+</div>
+<div class="grofile-hash-map-d62164e7636c20cead04c8ee9ab9b331">
+</div>
+<div class="grofile-hash-map-4561f47b136bd0e73472d223ef3dca60">
+</div>
+<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+</div>
+<div class="grofile-hash-map-036a1c0cd16cbd65ae717af58ab3f63b">
+</div>
+<div class="grofile-hash-map-db3ff172972224c17cf44a18b217210f">
+</div>
+</div>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/canthack.org\/wp-content\/plugins\/really-static\/static\/2013\/04\/pipurr-the-remote-cat-interaction-server\/":1361};
+		window.WPCOM_jetpack = true;
+			</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+<div id="sharing_email" style="display: none;">
+<form action="/2013/04/pipurr-the-remote-cat-interaction-server/" method="post">
+<label for="target_email">Send to Email Address</label>
+<input type="email" name="target_email" id="target_email" value=""/>
+<label for="source_name">Your Name</label>
+<input type="text" name="source_name" id="source_name" value=""/>
+<label for="source_email">Your Email Address</label>
+<input type="email" name="source_email" id="source_email" value=""/>
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off"/>
+<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+<img style="float: right; display: none" class="loading" src="//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16"/>
+<input type="submit" value="Send Email" class="sharing_send"/>
+<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancel</a>
+<div class="errors errors-1" style="display: none;">
+Post was not sent - check your email addresses! </div>
+<div class="errors errors-2" style="display: none;">
+Email check failed, please try again </div>
+<div class="errors errors-3" style="display: none;">
+Sorry, your blog cannot share posts by email. </div>
+</form>
+</div>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='//s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201521'></script>
+<script type='text/javascript' src='//s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.2.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=3.5.3'></script>
+<script type='text/javascript' src='//stats.wp.com/e-201521.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'21421473',post:'1361',tz:'0',srv:'canthack.org'} ]);
+	_stq.push([ 'clickTrackerInit', '21421473', '1361' ]);
+</script>
+</body>
+</html>

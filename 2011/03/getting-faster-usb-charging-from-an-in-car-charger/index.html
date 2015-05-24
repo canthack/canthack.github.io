@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8"/>
+<title>Getting Faster USB Charging from an In Car Charger | Can&#039;t Hack, Won&#039;t Hack</title>
+<link rel="profile" href="//gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="//canthack.org/wp-content/themes/twentyten/style.css"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Feed" href="//canthack.org/wp-content/plugins/really-static/static/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Getting Faster USB Charging from an In Car Charger Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/feed/"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/canthack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='fancybox-css' href='//canthack.org/wp-content/plugins/fancyboxify/fancybox/fancybox.css?ver=1.3.4' type='text/css' media='all'/>
+<link rel='stylesheet' id='genericons-css' href='//canthack.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='//canthack.org/wp-content/plugins/jetpack/css/jetpack.css?ver=3.5.3' type='text/css' media='all'/>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.fancybox.pack.js?ver=1.3.4'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.easing.pack.js?ver=1.3'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.mousewheel.pack.js?ver=3.0.4'></script>
+<link rel='prev' title='pwn PWM' href='//canthack.org/wp-content/plugins/really-static/static/2011/02/pwn-pwm/'/>
+<link rel='next' title='HGD 0.2.0 Released' href='//canthack.org/wp-content/plugins/really-static/static/2011/03/hgd-0-2-0-released/'/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='canonical' href='//canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/'/>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
+
+		imglinks.each(function(){ 
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
+		});
+	});
+</script><meta name="really-static looptest" content="testtesttest"/>
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Getting Faster USB Charging from an In Car Charger"/>
+<meta property="og:url" content="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/"/>
+<meta property="og:description" content="The other day I was driving to work with my brand new Google Nexus S Android phone on the dashboard, as usual. A new version of Google Maps had just come out, and coupled with the fact that I had j..."/>
+<meta property="article:published_time" content="2011-03-11T13:51:15+00:00"/>
+<meta property="article:modified_time" content="2011-03-14T16:06:56+00:00"/>
+<meta property="article:author" content="http://canthack.org/wp-content/plugins/really-static/static/author/tris/"/>
+<meta property="og:site_name" content="Can&#039;t Hack, Won&#039;t Hack"/>
+<meta property="og:image" content="http://canthack.org/uploads/Google-Nexus-S-fronton-154x300.jpg"/>
+<meta property="og:image" content="http://canthack.org/uploads/usb-300x223.jpg"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:image" content="http://canthack.org/uploads/Google-Nexus-S-fronton-154x300.jpg?w=240"/>
+<meta name="twitter:card" content="summary"/>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+<body class="single single-post postid-505 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">Can&#039;t Hack, Won&#039;t Hack</a>
+</span>
+</div>
+<div id="site-description"></div>
+<img src="//canthack.org/uploads/sltrain.jpg" width="940" height="198" alt=""/>
+</div> 
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu"><ul><li><a href="http://canthack.org/wp-content/plugins/really-static/static/">Home</a></li><li class="page_item page-item-2"><a href="http://canthack.org/wp-content/plugins/really-static/static/about/">About</a></li><li class="page_item page-item-106"><a href="http://canthack.org/wp-content/plugins/really-static/static/future/">Future</a></li><li class="page_item page-item-247"><a href="http://canthack.org/wp-content/plugins/really-static/static/rules/">Rules</a></li></ul></div>
+</div> 
+</div> 
+</div> 
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/02/pwn-pwm/" rel="prev"><span class="meta-nav">&larr;</span> pwn PWM</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/hgd-0-2-0-released/" rel="next">HGD 0.2.0 Released <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="post-505" class="post-505 post type-post status-publish format-standard hentry category-hardware">
+<h1 class="entry-title">Getting Faster USB Charging from an In Car Charger</h1>
+<div class="entry-meta">
+<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/" title="13:51" rel="bookmark"><span class="entry-date">March 11, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://canthack.org/wp-content/plugins/really-static/static/author/tris/" title="View all posts by Tris">Tris</a></span> </div> 
+<div class="entry-content">
+<p>The other day I was driving to work with my brand new Google Nexus S Android phone on the dashboard, as usual. A new version of <a title="Google Maps" href="https://market.android.com/details?id=com.google.android.apps.maps&amp;feature=search_result" target="_blank">Google Maps</a> had just come out, and coupled with the fact that I had just got a new phone, I decided to test the navigation.</p>
+<div id="attachment_533" style="width: 164px" class="wp-caption alignright"><a rel="attachment wp-att-533" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/google-nexus-s-fronton/"><img class="size-medium wp-image-533" title="Google-Nexus-S-fronton" src="//canthack.org/uploads/Google-Nexus-S-fronton-154x300.jpg" alt="Nexus S" width="154" height="300"/></a><p class="wp-caption-text">Google Nexus S</p></div>
+<p>When I got to work, I noticed the battery level on my phone was lower than I would have expected, so I viewed the battery discharge graph, and was surprised to see that the battery charge had been depleting all the while I was navigating with the screen on, even though the Nexus S was connected to the in car USB port, and charging all the while. My in car USB port is rated at 1A, but something was surely up.</p>
+<p>After some Googling, I came to the conclusion that the phone was thinking it was connected to a standard USB port, not an AC adapter, and was therefore limiting itself to only draw 500mA of current, irrespective of what the charger can deliver, to remain compliant with USB standards (where a computer USB port can only deliver a maximum of 500mA).</p>
+<p>To confirm what I had suspected, I used the Nexus&#8217;s diagnostic mode. To enter this mode, I simply tap the code <code>*#*#INFO#*#*</code> into the dialer. When the main diagnostic screen appeared, I clicked &#8220;Battery information&#8221; to see what source the Nexus <em>thought </em>it was connected to. Sure enough, when connected to the in car USB, this screen was reporting &#8220;USB&#8221;, meaning that the phone is not able to take advantage of the 1A output of the car charger.</p>
+<p>So what I wanted to do was make the phone think it was connected to an AC adapter. To do this, the data lines on the USB connector (D+ and D-) must be shorted together. this signals to the phone that it is not connected to a computer and then the phone will go into fast charging mode.</p>
+<p>I then took a cheap micro USB cable and used a multimeter to check the connections on the cables, as we don&#8217;t want to short out the power + and &#8211; lines, that would be really bad! Once the correct cables were determined, I simply cut them, and soldered them together, as shown in the image.</p>
+<div id="attachment_509" style="width: 310px" class="wp-caption alignright"><a rel="attachment wp-att-509" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/usb/"><img class="size-medium wp-image-509" title="Shorting the data lines" src="//canthack.org/uploads/usb-300x223.jpg" alt="USB" width="300" height="223"/></a><p class="wp-caption-text">Shorting the data lines</p></div>
+<p>After putting the case back on the connector on the cable, I connected the phone back up to the car&#8217;s USB port, and sure enough, the phone reported itself as connected to AC as the charging mode on the INFO Screen.</p>
+<p>Testing this the next day, the battery graph showed a slight increase in charge over the course of the journey rather than the slight discharge of before, so the hack was a success.</p>
+<p>So now I have a cable specifically for using in the car. I do not recommend using this to connect to a PC or other &#8220;real&#8221; USB port, just in case!</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-505" class="share-facebook sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?share=facebook" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-505" class="share-twitter sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-stumbleupon"><a rel="nofollow" data-shared="" class="share-stumbleupon sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?share=stumbleupon" target="_blank" title="Click to share on StumbleUpon"><span></span><span class="sharing-screen-reader-text">Click to share on StumbleUpon (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div> </div> 
+<div id="entry-author-info">
+<div id="author-avatar">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=60&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=120&amp;d=mm&amp;r=g 2x' class='avatar avatar-60 photo' height='60' width='60'/> </div> 
+<div id="author-description">
+<h2>About Tris</h2>
+Tris is a software engineer with a PhD in image analysis. He likes real beer, photography, electric guitar based music and Unix operating systems. <div id="author-link">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/author/tris/" rel="author">
+View all posts by Tris <span class="meta-nav">&rarr;</span> </a>
+</div> 
+</div> 
+</div> 
+<div class="entry-utility">
+This entry was posted in <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/" rel="category tag">Hardware</a>. Bookmark the <a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/" title="Permalink to Getting Faster USB Charging from an In Car Charger" rel="bookmark">permalink</a>. </div> 
+</div> 
+<div id="nav-below" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/02/pwn-pwm/" rel="prev"><span class="meta-nav">&larr;</span> pwn PWM</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/hgd-0-2-0-released/" rel="next">HGD 0.2.0 Released <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="comments">
+<h3 id="comments-title">14 Responses to <em>Getting Faster USB Charging from an In Car Charger</em></h3>
+<ol class="commentlist">
+<li class="post pingback">
+<p>Pingback: <a href='http://www.androidiani.com/forum/google-nexus-s/69584-batteria-al-94-ora-non-pi.html#post656618' rel='external nofollow' class='url'>Anonymous</a></p>
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-7618">
+<div id="comment-7618">
+<div class="comment-author vcard">
+<img alt='' src='//2.gravatar.com/avatar/260b7356ba5143304b4fb40ab9e17a9b?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/260b7356ba5143304b4fb40ab9e17a9b?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://www.flameit.wordpress.com' rel='external nofollow' class='url'>Diekolade</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-7618/index.html">
+May 10, 2012 at 15:01</a> </div> 
+<div class="comment-body"><p>Thanks a lot for this, I really need that for my android . Thanks again.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=7618#respond' onclick='return addComment.moveForm( "comment-7618", "7618", "respond", "505" )' aria-label='Reply to Diekolade'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-12149">
+<div id="comment-12149">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/3a2d88877c29016ff33cf5d92d4512b3?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3a2d88877c29016ff33cf5d92d4512b3?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Shibu</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-12149/index.html">
+November 28, 2012 at 00:18</a> </div> 
+<div class="comment-body"><p>I just did this today before reading your article. I shorted out the green &amp; white wires &amp; left the black &amp; red alone. In your pic it looks like you shorted out the white &amp; black. Aren&#8217;t they all standard colors?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=12149#respond' onclick='return addComment.moveForm( "comment-12149", "12149", "respond", "505" )' aria-label='Reply to Shibu'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor even depth-2" id="li-comment-12187">
+<div id="comment-12187">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-12187/index.html">
+November 28, 2012 at 10:01</a> </div> 
+<div class="comment-body"><p>Hi Shibu,</p>
+<p>It seems that the colours should be standard, Red and Black for +ve and GND, then Green and White for data, however, looking at my picture again, the colours seem to be Green, Red, Yellow and White.</p>
+<p>To determine which lines were which, I used a continuity tester connetced to the pins on the other end of the cable, to be sure that I had the correct wires.</p>
+<p>Hope this helps,<br/>
+Tris</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=12187#respond' onclick='return addComment.moveForm( "comment-12187", "12187", "respond", "505" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+<li class="comment odd alt thread-even depth-1" id="li-comment-15971">
+<div id="comment-15971">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/01b7baad8c92364a3b24e2ca5fa53314?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01b7baad8c92364a3b24e2ca5fa53314?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tom</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-15971/index.html">
+January 1, 2013 at 23:56</a> </div> 
+<div class="comment-body"><p>Hi,<br/>
+I have the same problem and I am very glad to find solution on your website.<br/>
+Fortunately it is not so difficult to make the wire <img src="//canthack.org/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;"/><br/>
+However I am puzzled about typing info in your dialer. I can type *#*# but cannot type info&#8230; since there are only numbers showing&#8230; do you know the trick how to type in dialer letters not only numbers? I was trying to hold the key the same way when in old phone when typing text message using alpha numeric keypad but this faild&#8230;.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=15971#respond' onclick='return addComment.moveForm( "comment-15971", "15971", "respond", "505" )' aria-label='Reply to Tom'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor even depth-2" id="li-comment-16175">
+<div id="comment-16175">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-16175/index.html">
+January 3, 2013 at 17:42</a> </div> 
+<div class="comment-body"><p>iINFO is written using numbers, so 4636.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=16175#respond' onclick='return addComment.moveForm( "comment-16175", "16175", "respond", "505" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-24708">
+<div id="comment-24708">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/caa5f750469251ae1e2bf01ddb2d742e?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/caa5f750469251ae1e2bf01ddb2d742e?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">wildfiyah</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-24708/index.html">
+April 14, 2013 at 00:21</a> </div> 
+<div class="comment-body"><p>I saw a similar hack, but done differently. The person opened up the USB charger itself and soldered the two terminals to remove the limitation. On putting it back together he had a higher output as well. In his situation, the charger wasn&#8217;t putting out enough juice.<br/>
+However what you&#8217;re saying is that it was the cable in your scenario. Do you think you could have had similar results using the above mentioned method? that perhaps without cutting up the cable, it would not be receiving a signal on those two wires and therefore take in more current? Definitely would like to understand this better.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=24708#respond' onclick='return addComment.moveForm( "comment-24708", "24708", "respond", "505" )' aria-label='Reply to wildfiyah'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment byuser comment-author-tris bypostauthor even thread-even depth-1" id="li-comment-24722">
+<div id="comment-24722">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-24722/index.html">
+April 14, 2013 at 09:09</a> </div> 
+<div class="comment-body"><p>The two wires that I shorted do not carry any current that the device can use for charging. They are signal wires used to carry data (when syncing for example). Shorting them works with Nexus phones because that&#8217;s how they work. &#8211; they assume that if this is shorted then it is not connected to a USB port on a computer but to an AC adapter. </p>
+<p>I&#8217;m sure there are ways of modifying chargers to get more current as well, but I am not aware of any.</p>
+<p>On thing interesting to note is that Apple devices like iPhones, iPods etc look for voltages across the two data lines in order to decide how much current to draw, as can be seen on ladyada:<br/>
+<a href="http://www.ladyada.net/make/mintyboost/icharge.html" rel="nofollow">http://www.ladyada.net/make/mintyboost/icharge.html</a></p>
+<p>Thanks,<br/>
+Tris</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=24722#respond' onclick='return addComment.moveForm( "comment-24722", "24722", "respond", "505" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-26606">
+<div id="comment-26606">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Giorgos</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26606/index.html">
+July 2, 2013 at 21:34</a> </div> 
+<div class="comment-body"><p>The D+ and D- must be shorted from the phone side or the charger side?<br/>
+If i have a whole charger without separate usb cable, can i use a separate usb cable (with<br/>
+shorted D+ and D-) which would conected to charger output?<br/>
++5V and GND of usb cable connected to charger output and D+ D- shorted together in phone side</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=26606#respond' onclick='return addComment.moveForm( "comment-26606", "26606", "respond", "505" )' aria-label='Reply to Giorgos'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor even depth-2" id="li-comment-26607">
+<div id="comment-26607">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26607/index.html">
+July 2, 2013 at 21:37</a> </div> 
+<div class="comment-body"><p>You can connect the data lines on either side. Make sure you do not connect the + or ground to anything else, only connect the data lines together.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=26607#respond' onclick='return addComment.moveForm( "comment-26607", "26607", "respond", "505" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment odd alt depth-3" id="li-comment-26608">
+<div id="comment-26608">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Giorgos</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26608/index.html">
+July 2, 2013 at 22:00</a> </div> 
+<div class="comment-body"><p>ok, i&#8217;ll connect the data lines in phone side. it is safe for phone, right?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=26608#respond' onclick='return addComment.moveForm( "comment-26608", "26608", "respond", "505" )' aria-label='Reply to Giorgos'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-tris bypostauthor even depth-4" id="li-comment-26609">
+<div id="comment-26609">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26609/index.html">
+July 2, 2013 at 22:01</a> </div> 
+<div class="comment-body"><p>All I can say is it never harmed my Nexus S as far as I can tell. Of course your experience may vary, and anything you do to your phone is ultimately your responsibility.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=26609#respond' onclick='return addComment.moveForm( "comment-26609", "26609", "respond", "505" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment odd alt depth-5" id="li-comment-26611">
+<div id="comment-26611">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Giorgos</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26611/index.html">
+July 2, 2013 at 22:40</a> </div> 
+<div class="comment-body"><p>Ok, thank you Tris!</p>
+</div>
+<div class="reply">
+</div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+</ul> 
+</li> 
+</ul> 
+</li> 
+</ul> 
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-26636">
+<div id="comment-26636">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6b606b20e158d9893620673e409fef7e?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Giorgos</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#comment-26636/index.html">
+July 3, 2013 at 11:15</a> </div> 
+<div class="comment-body"><p>My car charger has already &#8220;AC charge&#8221; so, i dont have anything to do. right?<br/>
+But the charge still not working after few minutes. may this happens because<br/>
+the phone are heated from the sun? i check the battery and the temp reached 59 celcius.<br/>
+it is possibly the charge stop from high temp?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2011/03/getting-faster-usb-charging-from-an-in-car-charger/?replytocom=26636#respond' onclick='return addComment.moveForm( "comment-26636", "26636", "respond", "505" )' aria-label='Reply to Giorgos'>Reply</a> </div> 
+</div> 
+</li> 
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2011/03/getting-faster-usb-charging-from-an-in-car-charger/#respond" style="display:none;">Cancel reply</a></small></h3>
+<form action="//canthack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p> <p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required'/></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"/></p>
+<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p> <p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"/> <input type='hidden' name='comment_post_ID' value='505' id='comment_post_ID'/>
+<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="96158bbef9"/></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="245"/></p> </form>
+</div> 
+</div> 
+</div> 
+</div> 
+<div id="primary" class="widget-area" role="complementary">
+<ul class="xoxo">
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="//canthack.org/wp-content/plugins/really-static/static/">
+<div>
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" value="" name="s" id="s"/>
+<input type="submit" id="searchsubmit" value="Search"/>
+</div>
+</form></li> <li id="recent-posts-2" class="widget-container widget_recent_entries"> <h3 class="widget-title">Recent Posts</h3> <ul>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/">A new mod for Mega Drive 60Hz colour correction</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/">BarCamp Canterbury 2013 round-up</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/">PiPurr &#8211; The Remote Cat Interaction Server</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/">OggCamp 12</a>
+</li>
+</ul>
+</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-57224/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-54358/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link">black</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-45466/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link">Cami</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-44423/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3> <ul>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2014/04/'>April 2014</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/06/'>June 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/04/'>April 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/09/'>September 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/08/'>August 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/06/'>June 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/05/'>May 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/04/'>April 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/03/'>March 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/12/'>December 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/11/'>November 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/10/'>October 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/09/'>September 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/07/'>July 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/06/'>June 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/05/'>May 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/04/'>April 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/03/'>March 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/02/'>February 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/01/'>January 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/12/'>December 2010</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/11/'>November 2010</a></li>
+</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3> <ul>
+<li class="cat-item cat-item-7"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/">Arduino</a>
+</li>
+<li class="cat-item cat-item-5"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/crafting/">Crafting</a>
+</li>
+<li class="cat-item cat-item-16"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/events/">Events</a>
+</li>
+<li class="cat-item cat-item-9"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/gardening/">Gardening</a>
+</li>
+<li class="cat-item cat-item-6"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/">Hardware</a>
+</li>
+<li class="cat-item cat-item-4"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/">Programming</a>
+</li>
+<li class="cat-item cat-item-10"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/">Software</a>
+</li>
+<li class="cat-item cat-item-1"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/uncategorized/">Uncategorized</a>
+</li>
+<li class="cat-item cat-item-3"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/unix/">Unix</a>
+</li>
+</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3> <ul>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/wp-login.php">Log in</a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li> </ul>
+</li> </ul>
+</div> 
+</div> 
+<div id="footer" role="contentinfo">
+<div id="colophon">
+<div id="site-info">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">
+Can&#039;t Hack, Won&#039;t Hack </a>
+</div> 
+<div id="site-generator"><a href="http://www.php-welt.net/really-static/">powered by really static WordPress</a></div> 
+</div> 
+</div> 
+</div> 
+<div style="display:none">
+<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+</div>
+<div class="grofile-hash-map-260b7356ba5143304b4fb40ab9e17a9b">
+</div>
+<div class="grofile-hash-map-3a2d88877c29016ff33cf5d92d4512b3">
+</div>
+<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+</div>
+<div class="grofile-hash-map-01b7baad8c92364a3b24e2ca5fa53314">
+</div>
+<div class="grofile-hash-map-e9dcaeabd180f0c73efe466fc1754ed5">
+</div>
+<div class="grofile-hash-map-6b606b20e158d9893620673e409fef7e">
+</div>
+</div>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/canthack.org\/wp-content\/plugins\/really-static\/static\/2011\/03\/getting-faster-usb-charging-from-an-in-car-charger\/":505};
+		window.WPCOM_jetpack = true;
+			</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+<div id="sharing_email" style="display: none;">
+<form action="/2011/03/getting-faster-usb-charging-from-an-in-car-charger/" method="post">
+<label for="target_email">Send to Email Address</label>
+<input type="email" name="target_email" id="target_email" value=""/>
+<label for="source_name">Your Name</label>
+<input type="text" name="source_name" id="source_name" value=""/>
+<label for="source_email">Your Email Address</label>
+<input type="email" name="source_email" id="source_email" value=""/>
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off"/>
+<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+<img style="float: right; display: none" class="loading" src="//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16"/>
+<input type="submit" value="Send Email" class="sharing_send"/>
+<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancel</a>
+<div class="errors errors-1" style="display: none;">
+Post was not sent - check your email addresses! </div>
+<div class="errors errors-2" style="display: none;">
+Email check failed, please try again </div>
+<div class="errors errors-3" style="display: none;">
+Sorry, your blog cannot share posts by email. </div>
+</form>
+</div>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='//s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201521'></script>
+<script type='text/javascript' src='//s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.2.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=3.5.3'></script>
+<script type='text/javascript' src='//stats.wp.com/e-201521.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'21421473',post:'505',tz:'0',srv:'canthack.org'} ]);
+	_stq.push([ 'clickTrackerInit', '21421473', '505' ]);
+</script>
+</body>
+</html>

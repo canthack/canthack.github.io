@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8"/>
+<title>Introducing &#8216;The Sin&#039;: Edd&#8217;s YM2612 MIDI Instrument | Can&#039;t Hack, Won&#039;t Hack</title>
+<link rel="profile" href="//gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="//canthack.org/wp-content/themes/twentyten/style.css"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Feed" href="//canthack.org/wp-content/plugins/really-static/static/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Introducing &#8216;The Sin&#039;: Edd&#8217;s YM2612 MIDI Instrument Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/feed/"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/canthack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='fancybox-css' href='//canthack.org/wp-content/plugins/fancyboxify/fancybox/fancybox.css?ver=1.3.4' type='text/css' media='all'/>
+<link rel='stylesheet' id='genericons-css' href='//canthack.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='//canthack.org/wp-content/plugins/jetpack/css/jetpack.css?ver=3.5.3' type='text/css' media='all'/>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.fancybox.pack.js?ver=1.3.4'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.easing.pack.js?ver=1.3'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.mousewheel.pack.js?ver=3.0.4'></script>
+<link rel='prev' title='OggCamp 12' href='//canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/'/>
+<link rel='next' title='PiPurr &#8211; The Remote Cat Interaction Server' href='//canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/'/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='canonical' href='//canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/'/>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
+
+		imglinks.each(function(){ 
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
+		});
+	});
+</script><meta name="really-static looptest" content="testtesttest"/>
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Introducing &#039;The Sin&#039;: Edd&#039;s YM2612 MIDI Instrument"/>
+<meta property="og:url" content="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/"/>
+<meta property="og:description" content="[embedplusvideo height=&quot;507&quot; width=&quot;640&quot; standard=&quot; vars=&quot;ytid=_OiOyxsI5n8&amp;width=640&amp;height=507&amp;start=&amp;stop=&amp;rs=w&amp;hd=0&amp;autoplay=0&amp;react=1&amp;chapters=&amp;notes=&quot; i..."/>
+<meta property="article:published_time" content="2012-09-20T14:05:46+00:00"/>
+<meta property="article:modified_time" content="2013-04-14T11:27:45+00:00"/>
+<meta property="article:author" content="http://canthack.org/wp-content/plugins/really-static/static/author/edd/"/>
+<meta property="og:site_name" content="Can&#039;t Hack, Won&#039;t Hack"/>
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary"/>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+<body class="single single-post postid-1337 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">Can&#039;t Hack, Won&#039;t Hack</a>
+</span>
+</div>
+<div id="site-description"></div>
+<img src="//canthack.org/uploads/sltrain.jpg" width="940" height="198" alt=""/>
+</div> 
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu"><ul><li><a href="http://canthack.org/wp-content/plugins/really-static/static/">Home</a></li><li class="page_item page-item-2"><a href="http://canthack.org/wp-content/plugins/really-static/static/about/">About</a></li><li class="page_item page-item-106"><a href="http://canthack.org/wp-content/plugins/really-static/static/future/">Future</a></li><li class="page_item page-item-247"><a href="http://canthack.org/wp-content/plugins/really-static/static/rules/">Rules</a></li></ul></div>
+</div> 
+</div> 
+</div> 
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/" rel="prev"><span class="meta-nav">&larr;</span> OggCamp 12</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/" rel="next">PiPurr &#8211; The Remote Cat Interaction Server <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="post-1337" class="post-1337 post type-post status-publish format-standard hentry category-arduino category-hardware">
+<h1 class="entry-title">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</h1>
+<div class="entry-meta">
+<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/" title="14:05" rel="bookmark"><span class="entry-date">September 20, 2012</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" title="View all posts by Edd">Edd</a></span> </div> 
+<div class="entry-content">
+<p>[embedplusvideo height=&#8221;507&#8243; width=&#8221;640&#8243; standard=&#8221;http://www.youtube.com/v/_OiOyxsI5n8?fs=1&#8243; vars=&#8221;ytid=_OiOyxsI5n8&amp;width=640&amp;height=507&amp;start=&amp;stop=&amp;rs=w&amp;hd=0&amp;autoplay=0&amp;react=1&amp;chapters=&amp;notes=&#8221; id=&#8221;ep1626&#8243; /]</p>
+<p>And because I am a slacker, I forgot to thank matth for the chip holders and Mex for being a Boris. Cheers!</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1337" class="share-facebook sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?share=facebook" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1337" class="share-twitter sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-stumbleupon"><a rel="nofollow" data-shared="" class="share-stumbleupon sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?share=stumbleupon" target="_blank" title="Click to share on StumbleUpon"><span></span><span class="sharing-screen-reader-text">Click to share on StumbleUpon (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div> </div> 
+<div id="entry-author-info">
+<div id="author-avatar">
+<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=60&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=120&amp;d=mm&amp;r=g 2x' class='avatar avatar-60 photo' height='60' width='60'/> </div> 
+<div id="author-description">
+<h2>About Edd</h2>
+Edd is a open-source enthusiast, PhD student, OpenBSD developer and general computer pessimist :) <div id="author-link">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" rel="author">
+View all posts by Edd <span class="meta-nav">&rarr;</span> </a>
+</div> 
+</div> 
+</div> 
+<div class="entry-utility">
+This entry was posted in <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/" rel="category tag">Arduino</a>, <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/" rel="category tag">Hardware</a>. Bookmark the <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/" title="Permalink to Introducing &#8216;The Sin&#039;: Edd&#8217;s YM2612 MIDI Instrument" rel="bookmark">permalink</a>. </div> 
+</div> 
+<div id="nav-below" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/" rel="prev"><span class="meta-nav">&larr;</span> OggCamp 12</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/" rel="next">PiPurr &#8211; The Remote Cat Interaction Server <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="comments">
+<h3 id="comments-title">5 Responses to <em>Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</em></h3>
+<ol class="commentlist">
+<li class="comment byuser comment-author-tris even thread-even depth-1" id="li-comment-9126">
+<div id="comment-9126">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/341c531b300cc77f6195b4fb0cb01b9c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Tris</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-9126/index.html">
+September 20, 2012 at 14:25</a> </div> 
+<div class="comment-body"><p>It&#8217;s awesome to see The Sin finished! We have to make some music now!</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?replytocom=9126#respond' onclick='return addComment.moveForm( "comment-9126", "9126", "respond", "1337" )' aria-label='Reply to Tris'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-edd bypostauthor odd alt depth-2" id="li-comment-9132">
+<div id="comment-9132">
+<div class="comment-author vcard">
+<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Edd</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-9132/index.html">
+September 20, 2012 at 19:35</a> </div> 
+<div class="comment-body"><p>Not finshed yet I&#8217;m afraid.</p>
+<p>I need to add a sd card interface and instrument browser. Then I need to reduce the serial chatter I am getting over the speaker 😛</p>
+<p>I also don&#8217;t support the LFO yet.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?replytocom=9132#respond' onclick='return addComment.moveForm( "comment-9132", "9132", "respond", "1337" )' aria-label='Reply to Edd'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+<li class="comment even thread-odd thread-alt depth-1" id="li-comment-9129">
+<div id="comment-9129">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/acc10ab2bad8257073ad6850c1f38d86?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/acc10ab2bad8257073ad6850c1f38d86?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://activeknowledgemusic.com' rel='external nofollow' class='url'>Active Knowledge</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-9129/index.html">
+September 20, 2012 at 18:06</a> </div> 
+<div class="comment-body"><p>Super cool, do you have any background info about this somewhere on the web? I&#8217;m supremely interested, but can&#8217;t watch the video at the moment.</p>
+<p>Cheers!</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?replytocom=9129#respond' onclick='return addComment.moveForm( "comment-9129", "9129", "respond", "1337" )' aria-label='Reply to Active Knowledge'>Reply</a> </div> 
+</div> 
+<ul class="children">
+<li class="comment byuser comment-author-edd bypostauthor odd alt depth-2" id="li-comment-9131">
+<div id="comment-9131">
+<div class="comment-author vcard">
+<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Edd</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-9131/index.html">
+September 20, 2012 at 19:34</a> </div> 
+<div class="comment-body"><p>I plan to publish a schematic and code for this, if that helps.</p>
+<p>I just need to finish the project first 😛</p>
+<p>I have just added the ability to load different instruments tonight.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?replytocom=9131#respond' onclick='return addComment.moveForm( "comment-9131", "9131", "respond", "1337" )' aria-label='Reply to Edd'>Reply</a> </div> 
+</div> 
+</li> 
+</ul> 
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-39117">
+<div id="comment-39117">
+<div class="comment-author vcard">
+<img alt='' src='//2.gravatar.com/avatar/e56fa4526ce1dce598571a5a9c10dee3?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/e56fa4526ce1dce598571a5a9c10dee3?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">
+May 27, 2014 at 11:46</a> </div> 
+<div class="comment-body"><p>Hi there!</p>
+<p>Did you finally released any schjematic for thsi one? Would love to give this a try <img src="//canthack.org/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;"/></p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/?replytocom=39117#respond' onclick='return addComment.moveForm( "comment-39117", "39117", "respond", "1337" )' aria-label='Reply to Manu'>Reply</a> </div> 
+</div> 
+</li> 
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#respond" style="display:none;">Cancel reply</a></small></h3>
+<form action="//canthack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p> <p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required'/></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"/></p>
+<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p> <p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"/> <input type='hidden' name='comment_post_ID' value='1337' id='comment_post_ID'/>
+<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="109c22ed41"/></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="6"/></p> </form>
+</div> 
+</div> 
+</div> 
+</div> 
+<div id="primary" class="widget-area" role="complementary">
+<ul class="xoxo">
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="//canthack.org/wp-content/plugins/really-static/static/">
+<div>
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" value="" name="s" id="s"/>
+<input type="submit" id="searchsubmit" value="Search"/>
+</div>
+</form></li> <li id="recent-posts-2" class="widget-container widget_recent_entries"> <h3 class="widget-title">Recent Posts</h3> <ul>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/">A new mod for Mega Drive 60Hz colour correction</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/">BarCamp Canterbury 2013 round-up</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/">PiPurr &#8211; The Remote Cat Interaction Server</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/">OggCamp 12</a>
+</li>
+</ul>
+</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-57224/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-54358/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link">black</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-45466/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link">Cami</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-44423/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3> <ul>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2014/04/'>April 2014</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/06/'>June 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/04/'>April 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/09/'>September 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/08/'>August 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/06/'>June 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/05/'>May 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/04/'>April 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/03/'>March 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/12/'>December 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/11/'>November 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/10/'>October 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/09/'>September 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/07/'>July 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/06/'>June 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/05/'>May 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/04/'>April 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/03/'>March 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/02/'>February 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/01/'>January 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/12/'>December 2010</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/11/'>November 2010</a></li>
+</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3> <ul>
+<li class="cat-item cat-item-7"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/">Arduino</a>
+</li>
+<li class="cat-item cat-item-5"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/crafting/">Crafting</a>
+</li>
+<li class="cat-item cat-item-16"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/events/">Events</a>
+</li>
+<li class="cat-item cat-item-9"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/gardening/">Gardening</a>
+</li>
+<li class="cat-item cat-item-6"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/">Hardware</a>
+</li>
+<li class="cat-item cat-item-4"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/">Programming</a>
+</li>
+<li class="cat-item cat-item-10"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/">Software</a>
+</li>
+<li class="cat-item cat-item-1"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/uncategorized/">Uncategorized</a>
+</li>
+<li class="cat-item cat-item-3"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/unix/">Unix</a>
+</li>
+</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3> <ul>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/wp-login.php">Log in</a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li> </ul>
+</li> </ul>
+</div> 
+</div> 
+<div id="footer" role="contentinfo">
+<div id="colophon">
+<div id="site-info">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">
+Can&#039;t Hack, Won&#039;t Hack </a>
+</div> 
+<div id="site-generator"><a href="http://www.php-welt.net/really-static/">powered by really static WordPress</a></div> 
+</div> 
+</div> 
+</div> 
+<div style="display:none">
+<div class="grofile-hash-map-2b68fe77303968e573ca1e7004462ae7">
+</div>
+<div class="grofile-hash-map-341c531b300cc77f6195b4fb0cb01b9c">
+</div>
+<div class="grofile-hash-map-2b68fe77303968e573ca1e7004462ae7">
+</div>
+<div class="grofile-hash-map-acc10ab2bad8257073ad6850c1f38d86">
+</div>
+<div class="grofile-hash-map-e56fa4526ce1dce598571a5a9c10dee3">
+</div>
+</div>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/canthack.org\/wp-content\/plugins\/really-static\/static\/2012\/09\/introducing-the-sin-edds-ym2612-midi-instrument\/":1337};
+		window.WPCOM_jetpack = true;
+			</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+<div id="sharing_email" style="display: none;">
+<form action="/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/" method="post">
+<label for="target_email">Send to Email Address</label>
+<input type="email" name="target_email" id="target_email" value=""/>
+<label for="source_name">Your Name</label>
+<input type="text" name="source_name" id="source_name" value=""/>
+<label for="source_email">Your Email Address</label>
+<input type="email" name="source_email" id="source_email" value=""/>
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off"/>
+<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+<img style="float: right; display: none" class="loading" src="//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16"/>
+<input type="submit" value="Send Email" class="sharing_send"/>
+<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancel</a>
+<div class="errors errors-1" style="display: none;">
+Post was not sent - check your email addresses! </div>
+<div class="errors errors-2" style="display: none;">
+Email check failed, please try again </div>
+<div class="errors errors-3" style="display: none;">
+Sorry, your blog cannot share posts by email. </div>
+</form>
+</div>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='//s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201521'></script>
+<script type='text/javascript' src='//s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.2.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=3.5.3'></script>
+<script type='text/javascript' src='//stats.wp.com/e-201521.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'21421473',post:'1337',tz:'0',srv:'canthack.org'} ]);
+	_stq.push([ 'clickTrackerInit', '21421473', '1337' ]);
+</script>
+</body>
+</html>

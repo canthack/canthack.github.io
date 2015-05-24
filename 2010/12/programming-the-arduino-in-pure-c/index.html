@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8"/>
+<title>Programming the Arduino in Pure C. | Can&#039;t Hack, Won&#039;t Hack</title>
+<link rel="profile" href="//gmpg.org/xfn/11"/>
+<link rel="stylesheet" type="text/css" media="all" href="//canthack.org/wp-content/themes/twentyten/style.css"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Feed" href="//canthack.org/wp-content/plugins/really-static/static/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/comments/feed/"/>
+<link rel="alternate" type="application/rss+xml" title="Can&#039;t Hack, Won&#039;t Hack &raquo; Programming the Arduino in Pure C. Comments Feed" href="//canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/feed/"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/canthack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='fancybox-css' href='//canthack.org/wp-content/plugins/fancyboxify/fancybox/fancybox.css?ver=1.3.4' type='text/css' media='all'/>
+<link rel='stylesheet' id='genericons-css' href='//canthack.org/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='jetpack_css-css' href='//canthack.org/wp-content/plugins/jetpack/css/jetpack.css?ver=3.5.3' type='text/css' media='all'/>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.fancybox.pack.js?ver=1.3.4'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.easing.pack.js?ver=1.3'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/fancyboxify/fancybox/jquery.mousewheel.pack.js?ver=3.0.4'></script>
+<link rel='prev' title='LCD Now Playing Screen' href='//canthack.org/wp-content/plugins/really-static/static/2010/12/lcd-now-playing-screen/'/>
+<link rel='next' title='The Video (part 3)' href='//canthack.org/wp-content/plugins/really-static/static/2010/12/the-video-part-3/'/>
+<meta name="generator" content="WordPress 4.2.2"/>
+<link rel='canonical' href='//canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/'/>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		var imglinks = $('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".JPG"], a[href$=".JPEG"], a[href$=".PNG"], a[href$=".GIF"]');
+
+		imglinks.each(function(){ 
+			if ( $(this).attr('rel').indexOf("fancybox") != -1 ) {
+				$(this).fancybox({
+					'transitionIn'	:	'none',
+					'transitionOut'	:	'none',
+					'titlePosition'	:	'over',
+					'titleFormat'	:	function(title, currentArray, currentIndex, currentOpts){
+									return '<span id="fancybox-title-over">(' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ')&nbsp;&nbsp;' + title : ')') + '</span>';
+								},
+					'title'		:	$(this).find("img").first().attr("title")	// Extract title from the first <img> element within the <a>
+				});
+			}
+		});
+	});
+</script><meta name="really-static looptest" content="testtesttest"/>
+ 
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Programming the Arduino in Pure C."/>
+<meta property="og:url" content="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/"/>
+<meta property="og:description" content="For hack #2, I started looking at how I could program an Arduino; an affordable hobby development board which uses an Atmega AVR microcontroller. More information here. We add a twist by not using ..."/>
+<meta property="article:published_time" content="2010-12-16T12:39:45+00:00"/>
+<meta property="article:modified_time" content="2011-01-22T01:52:35+00:00"/>
+<meta property="article:author" content="http://canthack.org/wp-content/plugins/really-static/static/author/edd/"/>
+<meta property="og:site_name" content="Can&#039;t Hack, Won&#039;t Hack"/>
+<meta property="og:image" content="http://canthack.org/uploads/arduino-150x150.jpg"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:image" content="http://canthack.org/uploads/arduino-150x150.jpg?w=240"/>
+<meta name="twitter:card" content="summary"/>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+<body class="single single-post postid-253 single-format-standard">
+<div id="wrapper" class="hfeed">
+<div id="header">
+<div id="masthead">
+<div id="branding" role="banner">
+<div id="site-title">
+<span>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">Can&#039;t Hack, Won&#039;t Hack</a>
+</span>
+</div>
+<div id="site-description"></div>
+<img src="//canthack.org/uploads/sltrain.jpg" width="940" height="198" alt=""/>
+</div> 
+<div id="access" role="navigation">
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu"><ul><li><a href="http://canthack.org/wp-content/plugins/really-static/static/">Home</a></li><li class="page_item page-item-2"><a href="http://canthack.org/wp-content/plugins/really-static/static/about/">About</a></li><li class="page_item page-item-106"><a href="http://canthack.org/wp-content/plugins/really-static/static/future/">Future</a></li><li class="page_item page-item-247"><a href="http://canthack.org/wp-content/plugins/really-static/static/rules/">Rules</a></li></ul></div>
+</div> 
+</div> 
+</div> 
+<div id="main">
+<div id="container">
+<div id="content" role="main">
+<div id="nav-above" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/lcd-now-playing-screen/" rel="prev"><span class="meta-nav">&larr;</span> LCD Now Playing Screen</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/the-video-part-3/" rel="next">The Video (part 3) <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="post-253" class="post-253 post type-post status-publish format-standard hentry category-arduino category-hardware category-programming">
+<h1 class="entry-title">Programming the Arduino in Pure C.</h1>
+<div class="entry-meta">
+<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/" title="12:39" rel="bookmark"><span class="entry-date">December 16, 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" title="View all posts by Edd">Edd</a></span> </div> 
+<div class="entry-content">
+<p><img src="//canthack.org/uploads/arduino-150x150.jpg" alt="" title="Arduino by Joe Seggiola, on Flickr" width="150" height="150" class="alignright size-thumbnail wp-image-292"/>For hack #2, I started looking at how I could program an Arduino; an affordable hobby development board which uses an Atmega AVR microcontroller. More information <a href="http://www.arduino.cc/">here</a>. We add a twist by not using the Arduino IDE and instead using the old faithful <a href="http://vim.org">text editor</a>.</p>
+<h2>Stuff You Need</h2>
+<ul>
+<li><a href="http://www.arduino.cc/">Arduino</a> &#8211; I was using a <a href="http://www.arduino.cc/en/Main/ArduinoBoardDuemilanove">Duemilanove</a></li>
+<li><a href="www.avrfreaks.net/AVRGCC">AVR-GCC</a></li>
+<li><a href="http://www.nongnu.org/avrdude/">Avrdude</a></li>
+<li>Your favorite text editor</li>
+<li>6 x LEDs</li>
+<li>6 x 220 Ohm Resistors</li>
+<li>A breadboard</li>
+<li>Cables</li>
+<li>USB cable</li>
+<li><a href="http://www.amazon.co.uk/C-Programming-Language-2nd/dp/0131103628/ref=sr_1_3?s=books&#038;ie=UTF8&#038;qid=1292502807&#038;sr=1-3">C knowledge</a></li>
+</ul>
+<p>Total cost, £30 or so. All of the software is free and open.</p>
+<h2>Implementation</h2>
+<p>On the web you will find the <a href="http://arduino.cc/en/Hacking/PinMapping168">Arduino port map</a>. From here you can figure out how to hook 6 LEDs (with a resisitor each) up to port B pins 0-5. It&#8217;s pretty simple stuff, you don&#8217;t need a schematic. Now we need to make those leds-a-blinken.</p>
+<p>What I needed then was a tutorial. Google quickly lead me to <a href="https://www.mainframe.cx/~ckuethe/avr-c-tutorial/">Chris Kuethe&#8217;s Arduino tutorial</a>. As it turns out, ckuethe is the avr-gcc maintainer for OpenBSD &#8212; small world. By following these tutorials, you can easily get up to speed. Half an hour later and I had a &#8220;Knight Rider Emulator&#8221; using 6 LEDs:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">
+/* $CSK: lesson1.c,v 1.3 2009/05/17 06:22:44 ckuethe Exp $ */
+/*
+ * Copyright (c) 2008 Chris Kuethe &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c2a1aab0abb1eca9b7a7b6aaa782a5afa3abaeeca1adaf">[email&#160;protected]</a><script cf-hash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("cf-hash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}}}catch(u){}}();/* ]]> */</script>&gt;
+ *
+ * Permission to use, copy, modify, and distribute this software 
+ * for any purpose with or without fee is hereby granted, 
+ * provided that the above copyright notice and this permission
+ * notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL 
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED 
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL 
+ * THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR 
+ * CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING
+ * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF 
+ * CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ *
+ * Adapted as Knight Rider LEDs on an Arduino Duemilanove
+ * (c) Edd Barrett 2010
+ */
+
+#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+
+int main (void)
+{
+	uint8_t		leds = 1;
+
+	/* set PORTB for output*/
+	DDRB = 0xFF;
+
+	while(1) {
+		for (leds = 1; leds &lt;= (1 &lt;&lt; 5); leds &lt;&lt;= 1) {
+			PORTB = leds;
+			_delay_ms(200);
+		}
+		for (leds = (1 &lt;&lt; 4); leds &gt;= 2; leds &gt;&gt;= 1) {
+			PORTB = leds;
+			_delay_ms(200);
+		}
+	}
+
+	return 0;
+}
+</pre>
+<h2>Uploading with AvrDude</h2>
+<p>But how do we upload the binary onto the storage of the arduino?<br/>
+This part I had already figured out the night before and it took me quite some time, partially because I did not know what baud rate the Arduino was expecting. Once I had it figured, I adapted the sample makefile found on the <a href="http://www.arduino.cc/playground/FreeBSD/CLI">arduino wiki</a> &#8212; this one is for BSD make (suffix rules work a little differently to GNU make).</p>
+<pre class="brush: plain; title: ; notranslate" title="">
+# tools
+AVRDUDE=avrdude -F -V
+OBJCOPY=avr-objcopy
+CC=avr-gcc
+RM=rm -f
+
+# parameters
+MCU=atmega328
+F_CPU=16000000UL
+BIN_FORMAT=ihex
+PORT=/dev/cuaU0
+BAUD=57600
+PROTOCOL=arduino
+PART=ATMEGA3290
+CFLAGS=-Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU)
+PROG=addr
+SUDO=sudo
+
+.SUFFIXES: .elf .hex
+
+.c.elf:
+	$(CC) $(CFLAGS) -o $@ $&lt;
+
+.elf.hex:
+	$(OBJCOPY) -O $(BIN_FORMAT) -R .eeprom $&lt; $@
+
+.PHONY: all
+all: ${PROG}.hex
+
+${PROG}.hex: ${PROG}.elf
+
+${PROG}.elf: ${PROG}.c
+
+.PHONY: clean
+clean:
+	$(RM) ${PROG}.elf ${PROG}.hex
+
+.PHONY: upload
+upload: ${PROG}.hex
+	${SUDO} $(AVRDUDE) -c $(PROTOCOL) -p $(PART) -P $(PORT) \
+		-b $(BAUD) -U flash:w:${PROG}.hex
+</pre>
+<h2>Conclusion</h2>
+<p>I was pretty impressed with how easy it really was to program an AVR on OpenBSD. The compiler is familiar &#8211; it&#8217;s just GCC cross targeting, and the editor is familar &#8212; in my case it&#8217;s vim and not a bloated java GUI.</p>
+<p>Ofcourse, this just scratches the surface. Expect further hacks later.</p>
+<p>Thanks to ckuethe@ for his tutorial.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-253" class="share-facebook sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/?share=facebook" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-253" class="share-twitter sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-stumbleupon"><a rel="nofollow" data-shared="" class="share-stumbleupon sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/?share=stumbleupon" target="_blank" title="Click to share on StumbleUpon"><span></span><span class="sharing-screen-reader-text">Click to share on StumbleUpon (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div> </div> 
+<div id="entry-author-info">
+<div id="author-avatar">
+<img alt='' src='//2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=60&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2b68fe77303968e573ca1e7004462ae7?s=120&amp;d=mm&amp;r=g 2x' class='avatar avatar-60 photo' height='60' width='60'/> </div> 
+<div id="author-description">
+<h2>About Edd</h2>
+Edd is a open-source enthusiast, PhD student, OpenBSD developer and general computer pessimist :) <div id="author-link">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/author/edd/" rel="author">
+View all posts by Edd <span class="meta-nav">&rarr;</span> </a>
+</div> 
+</div> 
+</div> 
+<div class="entry-utility">
+This entry was posted in <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/" rel="category tag">Arduino</a>, <a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/" rel="category tag">Hardware</a>, <a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/" rel="category tag">Programming</a>. Bookmark the <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/" title="Permalink to Programming the Arduino in Pure C." rel="bookmark">permalink</a>. </div> 
+</div> 
+<div id="nav-below" class="navigation">
+<div class="nav-previous"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/lcd-now-playing-screen/" rel="prev"><span class="meta-nav">&larr;</span> LCD Now Playing Screen</a></div>
+<div class="nav-next"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/the-video-part-3/" rel="next">The Video (part 3) <span class="meta-nav">&rarr;</span></a></div>
+</div> 
+<div id="comments">
+<h3 id="comments-title">8 Responses to <em>Programming the Arduino in Pure C.</em></h3>
+<ol class="commentlist">
+<li class="comment even thread-even depth-1" id="li-comment-9">
+<div id="comment-9">
+<div class="comment-author vcard">
+<img alt='' src='//2.gravatar.com/avatar/87fe6f58ef07f1521d8c2c80ba407d22?s=40&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/87fe6f58ef07f1521d8c2c80ba407d22?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Shaun</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-9">
+December 16, 2010 at 13:15</a> </div> 
+<div class="comment-body"><p>Very nice Ed, loved the elegance of the solution.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2010/12/programming-the-arduino-in-pure-c/?replytocom=9#respond' onclick='return addComment.moveForm( "comment-9", "9", "respond", "253" )' aria-label='Reply to Shaun'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C &laquo; Balau</a></p>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-7561">
+<div id="comment-7561">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/cd23fb1b86d3398bbdf7c74e8992e496?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cd23fb1b86d3398bbdf7c74e8992e496?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">clvrmnky</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-7561/index.html">
+May 5, 2012 at 00:05</a> </div> 
+<div class="comment-body"><p>I suspect &#8220;PART=ATMEGA3290&#8243; is wrong, but the warning is being suppressed by the -F option passed to avrdude.</p>
+<p>The Duemilanove either has a &#8216;168 or a &#8216;328, so the partno is going to match that. If you have a later device, the partno is going to almost certainly be &#8220;ATMEGA328P&#8221;.</p>
+<p>In fact, the PART and MCU variables in the makefile can be set to this same string.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2010/12/programming-the-arduino-in-pure-c/?replytocom=7561#respond' onclick='return addComment.moveForm( "comment-7561", "7561", "respond", "253" )' aria-label='Reply to clvrmnky'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-28634">
+<div id="comment-28634">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/1fa51fae12263b0710a1ab937f84c0bf?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/1fa51fae12263b0710a1ab937f84c0bf?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Mahdi</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-28634/index.html">
+September 4, 2013 at 00:30</a> </div> 
+<div class="comment-body"><p>what if we wanna to the work with arduino Ethernet shield? can we use arduino library with pure C? is there any way to stick to Ansi C and also take advantage of the library in some cases like Network programming or even work with memory stick?</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2010/12/programming-the-arduino-in-pure-c/?replytocom=28634#respond' onclick='return addComment.moveForm( "comment-28634", "28634", "respond", "253" )' aria-label='Reply to Mahdi'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-29067">
+<div id="comment-29067">
+<div class="comment-author vcard">
+<img alt='' src='//1.gravatar.com/avatar/46aebf3e41efe39bfc56833ff0004450?s=40&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/46aebf3e41efe39bfc56833ff0004450?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn"><a href='http://pcarduino.blogspot.co.uk/' rel='external nofollow' class='url'>dagon666</a></cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-29067/index.html">
+September 28, 2013 at 07:45</a> </div> 
+<div class="comment-body"><p>Hi, nice post. You can check my Makefile, which is targeted for arduino Uno Rev 3 with atmega328p: <a href="https://gist.github.com/dagon666/6654222" rel="nofollow">https://gist.github.com/dagon666/6654222</a></p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2010/12/programming-the-arduino-in-pure-c/?replytocom=29067#respond' onclick='return addComment.moveForm( "comment-29067", "29067", "respond", "253" )' aria-label='Reply to dagon666'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="comment even thread-even depth-1" id="li-comment-29801">
+<div id="comment-29801">
+<div class="comment-author vcard">
+<img alt='' src='//0.gravatar.com/avatar/3a2396ec90111f4c77df538c7e1c2aa7?s=40&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3a2396ec90111f4c77df538c7e1c2aa7?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40'/> <cite class="fn">Vikki Ford</cite> <span class="says">says:</span> </div> 
+<div class="comment-meta commentmetadata"><a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-29801/index.html">
+November 8, 2013 at 09:27</a> </div> 
+<div class="comment-body"><p>I find it easier to use ICC7AVR C compiler (only because I use it at work) and AVRISP Mk2 if I want to program in a non-Arduino environment but use the Arduino board. To be honest I rarely do that. I tend to stick an Atmel on a breadboard and programmed to use its internal oscillator. One Atmel, one reset tie high resistor and anything else you want. Hmmm, I also use and AVR Dragon with the zif socket in place to program the chip. Mind you, the little projects I&#8217;m doing at the moment are only using Tiny25&#8217;s and 44&#8217;s. Don&#8217;t need the whopping memory of the 328p for these. My compiler is a 4k limited expired demo but at some point I&#8217;ll cough for the student/hobbyist license to unlock it to 64K.</p>
+<p>Note that the AVRISP Mk2 will attach directly to an Arduino board and is run from AVR Studio 4 (I don&#8217;t like Studio 6, far too slow).</p>
+<p>Hope that is of some help to others further along the Atmel road.</p>
+</div>
+<div class="reply">
+<a class='comment-reply-link' href='/2010/12/programming-the-arduino-in-pure-c/?replytocom=29801#respond' onclick='return addComment.moveForm( "comment-29801", "29801", "respond", "253" )' aria-label='Reply to Vikki Ford'>Reply</a> </div> 
+</div> 
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></p>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></p>
+</li> 
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2010/12/programming-the-arduino-in-pure-c/#respond" style="display:none;">Cancel reply</a></small></h3>
+<form action="//canthack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p> <p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required'/></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30"/></p>
+<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p> <p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"/> <input type='hidden' name='comment_post_ID' value='253' id='comment_post_ID'/>
+<input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4664518268"/></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="190"/></p> </form>
+</div> 
+</div> 
+</div> 
+</div> 
+<div id="primary" class="widget-area" role="complementary">
+<ul class="xoxo">
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="//canthack.org/wp-content/plugins/really-static/static/">
+<div>
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" value="" name="s" id="s"/>
+<input type="submit" id="searchsubmit" value="Search"/>
+</div>
+</form></li> <li id="recent-posts-2" class="widget-container widget_recent_entries"> <h3 class="widget-title">Recent Posts</h3> <ul>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/">A new mod for Mega Drive 60Hz colour correction</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/06/barcamp-canterbury-2013-round-up/">BarCamp Canterbury 2013 round-up</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2013/04/pipurr-the-remote-cat-interaction-server/">PiPurr &#8211; The Remote Cat Interaction Server</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a>
+</li>
+<li>
+<a href="http://canthack.org/wp-content/plugins/really-static/static/2012/08/oggcamp-12/">OggCamp 12</a>
+</li>
+</ul>
+</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/' rel='external nofollow' class='url'>Programming Arduino Uno in pure C | Freedom Embedded</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-57224/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://zeidman.biz/blog/?p=11' rel='external nofollow' class='url'>Building an Arduino Robot using SynthOS | Zeidman Technologies Blog</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2010/12/programming-the-arduino-in-pure-c/#comment-54358/index.html">Programming the Arduino in Pure C.</a></li><li class="recentcomments"><span class="comment-author-link">black</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-45466/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link">Cami</span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2014/04/a-new-mod-for-mega-drive-60hz-colour-correction/#comment-44423/index.html">A new mod for Mega Drive 60Hz colour correction</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://famfest.info' rel='external nofollow' class='url'>Manu</a></span> on <a href="http://canthack.org/wp-content/plugins/really-static/static/2012/09/introducing-the-sin-edds-ym2612-midi-instrument/#comment-39117/index.html">Introducing &#8216;The Sin': Edd&#8217;s YM2612 MIDI Instrument</a></li></ul></li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3> <ul>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2014/04/'>April 2014</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/06/'>June 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2013/04/'>April 2013</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/09/'>September 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/08/'>August 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/06/'>June 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/05/'>May 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/04/'>April 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2012/03/'>March 2012</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/12/'>December 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/11/'>November 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/10/'>October 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/09/'>September 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/07/'>July 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/06/'>June 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/05/'>May 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/04/'>April 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/03/'>March 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/02/'>February 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2011/01/'>January 2011</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/12/'>December 2010</a></li>
+<li><a href='http://canthack.org/wp-content/plugins/really-static/static/2010/11/'>November 2010</a></li>
+</ul>
+</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3> <ul>
+<li class="cat-item cat-item-7"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/arduino/">Arduino</a>
+</li>
+<li class="cat-item cat-item-5"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/crafting/">Crafting</a>
+</li>
+<li class="cat-item cat-item-16"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/events/">Events</a>
+</li>
+<li class="cat-item cat-item-9"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/gardening/">Gardening</a>
+</li>
+<li class="cat-item cat-item-6"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/hardware/">Hardware</a>
+</li>
+<li class="cat-item cat-item-4"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/programming/">Programming</a>
+</li>
+<li class="cat-item cat-item-10"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/software/">Software</a>
+</li>
+<li class="cat-item cat-item-1"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/uncategorized/">Uncategorized</a>
+</li>
+<li class="cat-item cat-item-3"><a href="http://canthack.org/wp-content/plugins/really-static/static/category/unix/">Unix</a>
+</li>
+</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3> <ul>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/wp-login.php">Log in</a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="http://canthack.org/wp-content/plugins/really-static/static/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li> </ul>
+</li> </ul>
+</div> 
+</div> 
+<div id="footer" role="contentinfo">
+<div id="colophon">
+<div id="site-info">
+<a href="http://canthack.org/wp-content/plugins/really-static/static/" title="Can&#039;t Hack, Won&#039;t Hack" rel="home">
+Can&#039;t Hack, Won&#039;t Hack </a>
+</div> 
+<div id="site-generator"><a href="http://www.php-welt.net/really-static/">powered by really static WordPress</a></div> 
+</div> 
+</div> 
+</div> 
+<div style="display:none">
+<div class="grofile-hash-map-2b68fe77303968e573ca1e7004462ae7">
+</div>
+<div class="grofile-hash-map-87fe6f58ef07f1521d8c2c80ba407d22">
+</div>
+<div class="grofile-hash-map-cd23fb1b86d3398bbdf7c74e8992e496">
+</div>
+<div class="grofile-hash-map-1fa51fae12263b0710a1ab937f84c0bf">
+</div>
+<div class="grofile-hash-map-46aebf3e41efe39bfc56833ff0004450">
+</div>
+<div class="grofile-hash-map-3a2396ec90111f4c77df538c7e1c2aa7">
+</div>
+</div>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/canthack.org\/wp-content\/plugins\/really-static\/static\/2010\/12\/programming-the-arduino-in-pure-c\/":253};
+		window.WPCOM_jetpack = true;
+			</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+<div id="sharing_email" style="display: none;">
+<form action="/2010/12/programming-the-arduino-in-pure-c/" method="post">
+<label for="target_email">Send to Email Address</label>
+<input type="email" name="target_email" id="target_email" value=""/>
+<label for="source_name">Your Name</label>
+<input type="text" name="source_name" id="source_name" value=""/>
+<label for="source_email">Your Email Address</label>
+<input type="email" name="source_email" id="source_email" value=""/>
+<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off"/>
+<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+<img style="float: right; display: none" class="loading" src="//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16"/>
+<input type="submit" value="Send Email" class="sharing_send"/>
+<a rel="nofollow" href="#cancel" class="sharing_cancel">Cancel</a>
+<div class="errors errors-1" style="display: none;">
+Post was not sent - check your email addresses! </div>
+<div class="errors errors-2" style="display: none;">
+Email check failed, please try again </div>
+<div class="errors errors-3" style="display: none;">
+Sorry, your blog cannot share posts by email. </div>
+</form>
+</div>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shCore.js?ver=2.1.364'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushCpp.js?ver=2.1.364'></script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushPlain.js?ver=2.1.364'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shCore.css?ver=2.1.364";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shThemeEclipse.css?ver=2.1.364";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.clipboardSwf = 'http://canthack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings.expandSource = 'show source';
+	SyntaxHighlighter.config.strings.viewSource = 'view source';
+	SyntaxHighlighter.config.strings.copyToClipboard = 'copy to clipboard';
+	SyntaxHighlighter.config.strings.copyToClipboardConfirmation = 'The code is in your clipboard now';
+	SyntaxHighlighter.config.strings.print = 'print';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='//canthack.org/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='//s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201521'></script>
+<script type='text/javascript' src='//s.gravatar.com/js/gprofiles.js?ver=2015Mayaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.2.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//canthack.org/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=3.5.3'></script>
+<script type='text/javascript' src='//stats.wp.com/e-201521.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.5.3',blog:'21421473',post:'253',tz:'0',srv:'canthack.org'} ]);
+	_stq.push([ 'clickTrackerInit', '21421473', '253' ]);
+</script>
+</body>
+</html>
